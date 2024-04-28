@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="DietApp.Views.PhenotypeAndGoal"
+             Title="Your goal and phenotype">
+    <ContentPage.Content>
+        <StackLayout Margin="20"
+                            Spacing="10">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                    
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                   
+
+            <Label Text="Current weight" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" FontSize="Large"
+                 />
+                <Entry  Grid.Column="1" Placeholder="enter your weight" Keyboard="Numeric" ></Entry>
+                
+            
+
+            </Grid>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
+

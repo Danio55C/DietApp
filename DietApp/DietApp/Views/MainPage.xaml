@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="DietApp.Views.MainPage"
+             Title="MainPage">
+    <!-- Layout children in two rows -->
+    <Grid >
+        <!--<Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>-->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.2*"/>
+            <RowDefinition Height="0.8*"/>
+        </Grid.RowDefinitions>
+
+        <Image Source="xamarin_logo.png"
+               BackgroundColor="{OnPlatform iOS=LightSlateGray, Android=#2196F3}"
+               
+               HeightRequest="64"
+               
+               Grid.Row="0"
+              />
+        <!-- Layout children vertically -->
+        <StackLayout Grid.Row="1" Margin="20"
+                            Spacing="10">
+
+                     
+            <Grid>
+                <!--<Grid.ColumnDefinitions>
+                    <ColumnDefinition  Width="0.9"/>
+                    <ColumnDefinition Width="0.1"/>
+                </Grid.ColumnDefinitions>-->
+
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+
+
+
+
+
+                <Label FontSize="22"  Grid.Row="0"  >
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <FormattedString.Spans>
+                                <Span Text="Your current goal"
+                                  FontAttributes="Bold"
+                                  FontSize="22" />
+                                <Span Text=" v1.0" />
+                            </FormattedString.Spans>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <Label  Grid.Row="1" Text="zhubienei wagi itp" />
+                <Button  Grid.Row="2" Text="Change your goal"
+                    Clicked="OnButtonClicked" />
+
+                <Label Grid.Row="3" FontSize="20" Text="Colories      0/x"></Label>
+                <ProgressBar  Grid.Row="4" ProgressColor="YellowGreen" Progress="0.1"></ProgressBar>
+
+                <Label Grid.Row="5" FontSize="20"  Text="Carbs      0/x"></Label>
+                <ProgressBar  Grid.Row="6" ProgressColor="BurlyWood"  Progress="0.1"></ProgressBar>
+
+                <Label  Grid.Row="7" FontSize="20" Text="Protein      0/x"></Label>
+                <ProgressBar  Grid.Row="8" ProgressColor="WhiteSmoke"  Progress="0.1"></ProgressBar>
+
+                <Label FontSize="20" Grid.Row="9"  Text="Fats      0/x"></Label>
+                <ProgressBar  Grid.Row="10" ProgressColor="Brown" Progress="0.1"></ProgressBar>
+
+            </Grid>
+        </StackLayout>
+
+    </Grid>
+
+</ContentPage>
+                
+
+
+
+
+
+
