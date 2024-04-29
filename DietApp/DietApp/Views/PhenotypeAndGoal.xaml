@@ -14,19 +14,50 @@
                     <RowDefinition/>
                     <RowDefinition/>
                     <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
                 </Grid.RowDefinitions>
-                    
+
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                   
 
-            <Label Text="Current weight" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" FontSize="Large"
+
+                <Label Text="Current weight" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" FontSize="Large"
                  />
                 <Entry  Grid.Column="1" Placeholder="enter your weight" Keyboard="Numeric" ></Entry>
+
+                <Label Grid.Row="1" Text="Height" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" FontSize="Large"/>
+
+                <Entry   Grid.Row="1" Grid.Column="1" Placeholder="enter your height" Keyboard="Numeric" ></Entry>
+
+                <Label Grid.Row="2" Text="Płeć" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" FontSize="Large"/>
+
+                <Picker   Grid.Row="2" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" Grid.Column="1"  ></Picker>
+                <!--ItemsSource=""-->
+
+                <Label Grid.Row="3" Text="Tryb życia" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" FontSize="Large"/>
+
+                <Picker   Grid.Row="3" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" Grid.Column="1"  ></Picker>
+
+                <Button Grid.Row="4" Text="Save" ></Button> 
                 
-            
+                <Button Grid.Row="4" Grid.Column="1" Text="Edit" ></Button> 
+
+                
+                <Label Grid.Row="6" Grid.ColumnSpan="2" Text="Your goal" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" FontSize="Title"/>
+
+                <Label Grid.Row="7" Text="Cel" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" FontSize="Large"/>
+
+                <Picker   Grid.Row="7" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" Grid.Column="1"  ></Picker>
+
+                <Button Grid.Row="8" WidthRequest="250" Grid.ColumnSpan="2" HorizontalOptions="Center" Text="Save Goal" ></Button>
+
+
+
+
+
 
             </Grid>
         </StackLayout>
