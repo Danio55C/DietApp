@@ -25,17 +25,13 @@ namespace DietApp.Views
             BindingContext = new Recepie();
         }
 
-        void LoadNote(string filename)
+        async void LoadNote(string itemId)
         {
             try
             {
+                int id = Convert.ToInt32(itemId);
                 // Retrieve the note and set it as the BindingContext of the page.
-                Recepie recepie = new Recepie
-                {
-                    Filename = filename,
-                    Text = File.ReadAllText(filename),
-                    Date = File.GetCreationTime(filename)
-                };
+                Recepie recepie = await App.Database.GetNoteAsync(id);
                 BindingContext = recepie;
             }
             catch (Exception)
@@ -47,17 +43,10 @@ namespace DietApp.Views
         async void OnSaveButtonClicked(object sender, EventArgs e)
         {
             var recepie = (Recepie)BindingContext;
-
-            if (string.IsNullOrWhiteSpace(recepie.Filename))
+            recepie.Date = DateTime.UtcNow;
+            if (!string.IsNullOrWhiteSpace(recepie.Text))
             {
-                // Save the file.
-                var filename = Path.Combine(App.FolderPath, $"{Path.GetRandomFileName()}.notes.txt");
-                File.WriteAllText(filename, recepie.Text);
-            }
-            else
-            {
-                // Update the file.
-                File.WriteAllText(recepie.Filename, recepie.Text);
+                await App.Database.SaveNoteAsync(recepie);
             }
 
             // Navigate backwards
@@ -66,13 +55,8 @@ namespace DietApp.Views
 
         async void OnDeleteButtonClicked(object sender, EventArgs e)
         {
-            var note = (Recepie)BindingContext;
-
-            // Delete the file.
-            if (File.Exists(note.Filename))
-            {
-                File.Delete(note.Filename);
-            }
+            var recepie = (Recepie)BindingContext;
+            await App.Database.DeleteNoteAsync(recepie);
 
             // Navigate backwards
             await Shell.Current.GoToAsync("..");

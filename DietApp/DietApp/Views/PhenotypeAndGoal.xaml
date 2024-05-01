@@ -3,11 +3,22 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="DietApp.Views.PhenotypeAndGoal"
              Title="Your goal and phenotype">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Picker">
+                <Setter Property="WidthRequest" Value="200"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
     <ContentPage.Content>
+        
         <StackLayout Margin="20"
                             Spacing="10">
             <Grid>
                 <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
                     <RowDefinition/>
                     <RowDefinition/>
                     <RowDefinition/>
@@ -24,38 +35,39 @@
                 </Grid.ColumnDefinitions>
 
 
-                <Label Text="Current weight" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" FontSize="Large"
-                 />
+                <Label Text="Current weight (kg)" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" FontSize="Large"
+                  x:Name="weightEntry" />
                 <Entry  Grid.Column="1" Placeholder="enter your weight" Keyboard="Numeric" ></Entry>
 
-                <Label Grid.Row="1" Text="Height" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" FontSize="Large"/>
+                <Label Grid.Row="1" Text="Height (cm)" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" FontSize="Large" />
 
-                <Entry   Grid.Row="1" Grid.Column="1" Placeholder="enter your height" Keyboard="Numeric" ></Entry>
+                <Entry   Grid.Row="1" Grid.Column="1" Placeholder="enter your height" Keyboard="Numeric"  x:Name="heightEntry" ></Entry>
+                    
+                <Label Grid.Row="2" Text="Your age" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" FontSize="Large"/>
 
-                <Label Grid.Row="2" Text="Płeć" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" FontSize="Large"/>
+                <Entry   Grid.Row="2" Grid.Column="1" Placeholder="enter your age" Keyboard="Numeric"  x:Name="ageEntry"></Entry>
 
-                <Picker   Grid.Row="2" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" Grid.Column="1"  ></Picker>
+                <Label Grid.Row="3" Text="Płeć" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" FontSize="Large"/>
+
+                <Picker   Grid.Row="3" Grid.Column="1" HorizontalOptions="CenterAndExpand" VerticalOptions="Center"  x:Name="genderPicker"  ></Picker>
                 <!--ItemsSource=""-->
 
-                <Label Grid.Row="3" Text="Tryb życia" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" FontSize="Large"/>
+                <Label Grid.ColumnSpan="2" Grid.Row="4" Text="Tryb życia" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" FontSize="Large"/>
 
-                <Picker   Grid.Row="3" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" Grid.Column="1"  ></Picker>
+                <Picker Title="wybierz swój tryb życia" WidthRequest="400" Grid.Row="5" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" Grid.ColumnSpan="2" x:Name="tDEpicker" ></Picker>
 
-                <Button Grid.Row="4" Text="Save" ></Button> 
+                <Button Grid.Row="6" Text="Save" Clicked="OnSaveButtonClicked"></Button> 
                 
-                <Button Grid.Row="4" Grid.Column="1" Text="Edit" ></Button> 
+                <Button Grid.Row="6" Grid.Column="1" Text="Edit" ></Button> 
 
                 
-                <Label Grid.Row="6" Grid.ColumnSpan="2" Text="Your goal" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" FontSize="Title"/>
+                <Label Grid.Row="8" Grid.ColumnSpan="2" Text="Your goal" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" FontSize="Title"/>
 
-                <Label Grid.Row="7" Text="Cel" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" FontSize="Large"/>
+                <Label Grid.Row="9" Text="Cel" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" FontSize="Large"/>
 
-                <Picker   Grid.Row="7" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" Grid.Column="1"  ></Picker>
+                <Picker   Grid.Row="9" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" Grid.Column="1"  x:Name="goalPicker" ></Picker>
 
-                <Button Grid.Row="8" WidthRequest="250" Grid.ColumnSpan="2" HorizontalOptions="Center" Text="Save Goal" ></Button>
-
-
-
+                <Button Grid.Row="10" WidthRequest="250" Grid.ColumnSpan="2" HorizontalOptions="Center" Text="Save Goal" ></Button>
 
 
 
@@ -63,4 +75,7 @@
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
+
+
+
 
