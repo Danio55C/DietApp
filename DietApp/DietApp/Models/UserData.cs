@@ -10,7 +10,7 @@ namespace DietApp.Models
         public int height { get; set; }
         public int age { get; set; }
         public string gender { get; set; }
-        public float activityIndex { get; set; }
+        public double activityIndex { get; set; }
         
     }
 }

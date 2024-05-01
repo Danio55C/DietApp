@@ -36,8 +36,8 @@
 
 
                 <Label Text="Current weight (kg)" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" FontSize="Large"
-                  x:Name="weightEntry" />
-                <Entry  Grid.Column="1" Placeholder="enter your weight" Keyboard="Numeric" ></Entry>
+                  />
+                <Entry  Grid.Column="1" Placeholder="enter your weight" Keyboard="Numeric"  x:Name="weightEntry"></Entry>
 
                 <Label Grid.Row="1" Text="Height (cm)" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" FontSize="Large" />
 

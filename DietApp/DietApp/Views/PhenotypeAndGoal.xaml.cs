@@ -10,6 +10,8 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using System.ComponentModel;
 using System.Reflection;
+using System.Linq.Expressions;
+using System.Security.Cryptography;
 
 namespace DietApp.Views
 {
@@ -42,15 +44,59 @@ namespace DietApp.Views
         {
             "lose weight","gain weight","maintain weight"
         };
-        async void OnSaveButtonClicked(object sender, EventArgs e)
+         void OnSaveButtonClicked(object sender, EventArgs e)
+        {
+            try
+            {
+                GetUsersData();
+            }
+            catch (Exception ex)
+            {
+
+                DisplayAlert("Błąd",ex.ToString(),"cancel");
+            }
+
+            //DisplayAlert("Ustawienia zapisano","twoje dane zostały zapisane" , "cancel");
+        }
+
+        private void GetUsersData()
         {
 
             UserData userdate = new UserData();
             userdate.gender = (string)genderPicker.SelectedItem;
-            userdate.currentWeight = Int32.Parse(weightEntry.Text);
-            userdate.height = Int32.Parse(heightEntry.Text);
-            userdate.age = Int32.Parse(ageEntry.Text);
+            userdate.currentWeight =int.Parse(weightEntry.Text);
+            userdate.height = int.Parse(heightEntry.Text);
+            userdate.age = int.Parse(ageEntry.Text);
+            
+            
+            switch (tDEpicker.SelectedItem)
+            { 
+                    case "Nieaktywny/siedzący: prawie brak aktywności w ciągu dnia":
+                    userdate.activityIndex = 1.2;
+                    break;
+                    case 2:
+                    userdate.activityIndex = 1.375;
+                    break;
+                    case 3:
+                    userdate.activityIndex = 1.55;
+                    break;
+                    case 4:
+                    userdate.activityIndex = 1.725;
+                    break;
+                    case 5:
+                    userdate.activityIndex = 1.9;
+                    break;
+                default:
+                    DisplayAlert("bŁad", "złe dane", "cancel");
+                    break;
+            }
+            DisplayAlert("Dobrze",$"płeć: {userdate.gender}, waga:{userdate.currentWeight}, wzrost: {userdate.height}, wiek:{userdate.age}, index:{userdate.activityIndex}"  ,"cancel");
         }
+
+
+
+
+
 
 
 
