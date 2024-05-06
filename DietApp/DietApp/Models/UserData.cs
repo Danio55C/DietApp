@@ -1,16 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using SQLite;
 
 namespace DietApp.Models
 {
     public class UserData
     {
-        public int currentWeight { get; set; }
-        public int height { get; set; }
-        public int age { get; set; }
-        public string gender { get; set; }
-        public double activityIndex { get; set; }
+        [PrimaryKey, Unique]
+        public  int ID { get; set; }
+
+        public int CurrentWeight { get; set; }
+        public int Height { get; set; }
+        public int Age { get; set; }
+        public string Gender { get; set; }
+        public double ActivityIndex { get; set; }
         
     }
 }

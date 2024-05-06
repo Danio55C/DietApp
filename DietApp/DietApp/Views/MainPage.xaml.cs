@@ -1,4 +1,5 @@
-﻿using DietApp.Views;
+﻿using DietApp.Data;
+using DietApp.Views;
 using System;
 using Xamarin.Essentials;
 using Xamarin.Forms;
@@ -10,7 +11,16 @@ namespace DietApp.Views
         public MainPage()
         {
             InitializeComponent();
+            
         }
+
+        //protected override async void OnAppearing()
+        //{
+            
+
+
+
+        //}
 
         async void OnButtonClicked(object sender, EventArgs e)
         {

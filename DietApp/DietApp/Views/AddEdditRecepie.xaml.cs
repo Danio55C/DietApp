@@ -43,6 +43,7 @@ namespace DietApp.Views
         async void OnSaveButtonClicked(object sender, EventArgs e)
         {
             var recepie = (Recepie)BindingContext;
+            
             recepie.Date = DateTime.UtcNow;
             if (!string.IsNullOrWhiteSpace(recepie.Text))
             {

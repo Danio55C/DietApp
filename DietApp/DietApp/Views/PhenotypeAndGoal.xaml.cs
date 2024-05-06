@@ -12,6 +12,7 @@ using System.ComponentModel;
 using System.Reflection;
 using System.Linq.Expressions;
 using System.Security.Cryptography;
+using DietApp.Data;
 
 namespace DietApp.Views
 {
@@ -23,28 +24,32 @@ namespace DietApp.Views
         public PhenotypeAndGoal()
         {
             InitializeComponent();
-            genderPicker.ItemsSource = genderList;
+            genderPicker.ItemsSource = GenderList;
 
             tDEpicker.ItemsSource = Enum.GetValues(typeof(LifeStyleTDE))
                             .Cast<LifeStyleTDE>()
                             .Select(value => EnumHelper.GetDescription(value))
                             .ToList();
-            goalPicker.ItemsSource = goalList;
+            goalPicker.ItemsSource = GoalList;
 
-
-
+            BindingContext = new UserData();
+            
         }
 
-        List<string> genderList = new List<string>
+        List<string> GenderList = new List<string>
         {
             "Female","Male"
         };
 
-        List<string> goalList = new List<string>
+        List<string> GoalList = new List<string>
         {
             "lose weight","gain weight","maintain weight"
         };
-         void OnSaveButtonClicked(object sender, EventArgs e)
+
+
+        
+
+        void OnSaveButtonClicked(object sender, EventArgs e)
         {
             try
             {
@@ -55,48 +60,91 @@ namespace DietApp.Views
 
                 DisplayAlert("Błąd",ex.ToString(),"cancel");
             }
-
+            
             //DisplayAlert("Ustawienia zapisano","twoje dane zostały zapisane" , "cancel");
         }
 
-        private void GetUsersData()
-        {
+        
 
-            UserData userdate = new UserData();
-            userdate.gender = (string)genderPicker.SelectedItem;
-            userdate.currentWeight =int.Parse(weightEntry.Text);
-            userdate.height = int.Parse(heightEntry.Text);
-            userdate.age = int.Parse(ageEntry.Text);
-            
-            
-            switch (tDEpicker.SelectedItem)
+        
+
+        async private void GetUsersData()
+        {
+            try
+            {
+
+                var userdate = (UserData)BindingContext;
+                userdate.Gender = (string)genderPicker.SelectedItem;
+                userdate.CurrentWeight = int.Parse(weightEntry.Text);
+                userdate.Height = int.Parse(heightEntry.Text);
+                userdate.Age = int.Parse(ageEntry.Text);
+
+
+
+
+
+
+                switch (tDEpicker.SelectedItem)
             { 
                     case "Nieaktywny/siedzący: prawie brak aktywności w ciągu dnia":
-                    userdate.activityIndex = 1.2;
+                    userdate.ActivityIndex = 1.2;
                     break;
-                    case 2:
-                    userdate.activityIndex = 1.375;
+                    case "Lekki: 1-3 treningów w tygodniu, lub praca z lekką aktywnością":
+                    userdate.ActivityIndex = 1.375;
                     break;
-                    case 3:
-                    userdate.activityIndex = 1.55;
+                    case "Średni: 3-5 treningów w tygodniu":
+                    userdate.ActivityIndex = 1.55;
                     break;
-                    case 4:
-                    userdate.activityIndex = 1.725;
+                    case "Wysoki: 6-7 treningów w tygodniu":
+                    userdate.ActivityIndex = 1.725;
                     break;
-                    case 5:
-                    userdate.activityIndex = 1.9;
+                    case "Bardzo Wysoki: Ciężka praca fizyczna lub treningi dwa razy w tygodniu":
+                    userdate.ActivityIndex = 1.9;
                     break;
                 default:
-                    DisplayAlert("bŁad", "złe dane", "cancel");
+                  await  DisplayAlert("bŁad", "Zlie wybrany Tryb życia", "cancel");
                     break;
             }
-            DisplayAlert("Dobrze",$"płeć: {userdate.gender}, waga:{userdate.currentWeight}, wzrost: {userdate.height}, wiek:{userdate.age}, index:{userdate.activityIndex}"  ,"cancel");
+                await App.Database.SaveUserDataAsync(userdate);
+
+           await DisplayAlert("Dobrze", $"płeć: {userdate.Gender}, waga:{userdate.CurrentWeight}, wzrost: {userdate.Height}, wiek:{userdate.Age}, index:{userdate.ActivityIndex}", "cancel");
+
+                
+               
+                
+            }
+           
+             catch (Exception ex)
+            {
+
+               await DisplayAlert("Błąd", ex.ToString(), "cancel");
+            }
         }
 
 
 
+        private void OnSaveGoalButtonClicked(object sender, EventArgs e)
+        {
+            UserGoal usergoal = new UserGoal();
+            usergoal.Goal = (string)goalPicker.SelectedItem;
+        }
+        private void OnEdditButtonClicked(object sender, EventArgs e)
+        {
+            try
+            {
 
+                var userdate = (UserData)BindingContext;
+                
+                DisplayAlert("Baza danych", $"płeć: {userdate.Gender}, waga:{userdate.CurrentWeight}, wzrost: {userdate.Height}, wiek:{userdate.Age}, index:{userdate.ActivityIndex}", "cancel");
+            }
+            catch (Exception ex)
+            {
 
+                 DisplayAlert("Błąd", ex.ToString(), "cancel");
+            }
+            
+            
+        }
 
 
 

@@ -14,7 +14,7 @@
                     Clicked="OnSaveButtonClicked" />
             <Button Grid.Column="1"
                     Text="Delete"
-                    Clicked="OnDeleteButtonClicked"/>
+                     Clicked="OnDeleteButtonClicked"/>
         </Grid>
     </StackLayout>
 </ContentPage>
