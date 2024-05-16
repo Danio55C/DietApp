@@ -7,7 +7,7 @@ namespace DietApp.Data
 {
     public class RecepieDatabase
     {
-        readonly SQLiteAsyncConnection _database;
+       private readonly SQLiteAsyncConnection _database;
 
         public RecepieDatabase(string dbPath)
         {
@@ -53,36 +53,39 @@ namespace DietApp.Data
         }
 
 
-        public Task<List<UserData>> GetUserDataAsync()
-        {
+        //public Task<List<UserData>> GetUserDataAsync()
+        //{
+        //    return _database.Table<UserData>().Where()
+        //}
 
-                            
-            return _database.Table<UserData>().ToListAsync();
 
-        }
+
 
         //public async Task<UserData> GetSettingAsync()
         //{
         //    return await _database.Table<UserData>().Where(x=>x.ID==1)
         //}
 
-        public async Task SaveUserDataAsync(UserData userData)
+        public void UpdateUserData(UserData userData)
         {
-            // Sprawdź, czy istnieje już rekord dla danego Id
-            var existingUser = await _database.FindAsync<UserData>(userData.ID);
+            _database.UpdateAsync(userData);
+        }
 
-            if (existingUser != null)
+        public void SaveUserData(UserData userData)
+        {
+            _database.InsertAsync(userData);
+        }
+
+        public Task<int> SaveUserDataAsync(UserData userData)
+        {
+            if (userData.ID != 0)
             {
-                // Jeśli istnieje, zaktualizuj rekord
-                await _database.UpdateAsync(userData);
+                return _database.UpdateAsync(userData);
             }
             else
             {
-                // Jeśli nie istnieje, wstaw nowy rekord
-                await _database.InsertAsync(userData);
+                return _database.InsertAsync(userData);
             }
         }
-
-
     }
 }

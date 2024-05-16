@@ -7,14 +7,16 @@ namespace DietApp.Models
 {
     public class UserData
     {
-        [PrimaryKey, Unique]
+        [PrimaryKey, AutoIncrement]
         public  int ID { get; set; }
 
         public int CurrentWeight { get; set; }
         public int Height { get; set; }
         public int Age { get; set; }
         public string Gender { get; set; }
-        public double ActivityIndex { get; set; }
+        public double ActivityIndex { get; set ; }
         
     }
+
+    
 }

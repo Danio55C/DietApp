@@ -5,13 +5,15 @@
              Title="MainPage">
     <!-- Layout children in two rows -->
     <Grid >
-        <!--<Grid.ColumnDefinitions>
+        <Grid.ColumnDefinitions>
             <ColumnDefinition />
             <ColumnDefinition />
-        </Grid.ColumnDefinitions>-->
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="0.2*"/>
-            <RowDefinition Height="0.8*"/>
+            <RowDefinition Height="0.05*"/>
+            <RowDefinition Height="0.1*"/>
+            <RowDefinition Height="0.65*"/>
         </Grid.RowDefinitions>
 
         <Image Source="xamarin_logo.png"
@@ -20,12 +22,29 @@
                HeightRequest="64"
                
                Grid.Row="0"
+               Grid.ColumnSpan="2"
               />
+        <Label FontSize="22"  Grid.Row="1"  >
+            <Label.FormattedText>
+                <FormattedString>
+                    <FormattedString.Spans>
+                        <Span  Text="Your current goal"
+                  FontAttributes="Bold"
+                  FontSize="22" 
+                  Grid.ColumnSpan="2"/>
+                        <Span Text=" v1.0" />
+                    </FormattedString.Spans>
+                </FormattedString>
+            </Label.FormattedText>
+        </Label>
+        <Button Grid.Column="1"  Grid.Row="2" Text="Change your goal"
+    Clicked="OnButtonClicked"  HorizontalOptions="End"/>
+        <Label Grid.Row="2" x:Name="userDataListView" Text="costam" VerticalOptions="Center" />
         <!-- Layout children vertically -->
-        <StackLayout Grid.Row="1" Margin="20"
+        <StackLayout Grid.Row="3" Margin="20" Grid.ColumnSpan="2"
                             Spacing="10">
 
-                     
+
             <Grid>
                 <!--<Grid.ColumnDefinitions>
                     <ColumnDefinition  Width="0.9"/>
@@ -42,48 +61,23 @@
                     <RowDefinition />
                     <RowDefinition />
                     <RowDefinition />
-                    <RowDefinition />
-                    <RowDefinition />
+
 
                 </Grid.RowDefinitions>
 
+                <Label Grid.Row="1" FontSize="20" Text="Colories      0/x"></Label>
+                <ProgressBar  Grid.Row="2" ProgressColor="YellowGreen" Progress="0.1"></ProgressBar>
 
+                <Label Grid.Row="3" FontSize="20"  Text="Carbs      0/x"></Label>
+                <ProgressBar  Grid.Row="4" ProgressColor="BurlyWood"  Progress="0.1"></ProgressBar>
 
+                <Label  Grid.Row="5" FontSize="20" Text="Protein      0/x"></Label>
+                <ProgressBar  Grid.Row="6" ProgressColor="WhiteSmoke"  Progress="0.1"></ProgressBar>
 
+                <Label FontSize="20" Grid.Row="7"  Text="Fats      0/x"></Label>
+                <ProgressBar  Grid.Row="8" ProgressColor="Brown" Progress="0.1"></ProgressBar>
 
-                <Label FontSize="22"  Grid.Row="0"  >
-                    <Label.FormattedText>
-                        <FormattedString>
-                            <FormattedString.Spans>
-                                <Span Text="Your current goal"
-                                  FontAttributes="Bold"
-                                  FontSize="22" />
-                                <Span Text=" v1.0" />
-                            </FormattedString.Spans>
-                        </FormattedString>
-                    </Label.FormattedText>
-                </Label>
-                <Button  Grid.Row="1" Text="Change your goal"
-                    Clicked="OnButtonClicked"  HorizontalOptions="End"/>
-                <Label Grid.Row="1" x:Name="userDataListView" Text="costam" VerticalOptions="Center" />
-
-                
-                
-                
-
-                <Label Grid.Row="3" FontSize="20" Text="Colories      0/x"></Label>
-                <ProgressBar  Grid.Row="4" ProgressColor="YellowGreen" Progress="0.1"></ProgressBar>
-
-                <Label Grid.Row="5" FontSize="20"  Text="Carbs      0/x"></Label>
-                <ProgressBar  Grid.Row="6" ProgressColor="BurlyWood"  Progress="0.1"></ProgressBar>
-
-                <Label  Grid.Row="7" FontSize="20" Text="Protein      0/x"></Label>
-                <ProgressBar  Grid.Row="8" ProgressColor="WhiteSmoke"  Progress="0.1"></ProgressBar>
-
-                <Label FontSize="20" Grid.Row="9"  Text="Fats      0/x"></Label>
-                <ProgressBar  Grid.Row="10" ProgressColor="Brown" Progress="0.1"></ProgressBar>
-               
-                <Button  Grid.Row ="11" Text="Add a meal"></Button>
+                <Button  Grid.Row ="9" Text="Add a meal"></Button>
 
             </Grid>
         </StackLayout>
@@ -92,6 +86,16 @@
 
 </ContentPage>
                 
+
+
+
+
+
+
+
+
+
+
 
 
 
