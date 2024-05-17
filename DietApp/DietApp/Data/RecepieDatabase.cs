@@ -66,25 +66,18 @@ namespace DietApp.Data
         //    return await _database.Table<UserData>().Where(x=>x.ID==1)
         //}
 
-        public void UpdateUserData(UserData userData)
-        {
-            _database.UpdateAsync(userData);
-        }
-
-        public void SaveUserData(UserData userData)
-        {
-            _database.InsertAsync(userData);
-        }
+        
 
         public Task<int> SaveUserDataAsync(UserData userData)
         {
-            if (userData.ID != 0)
+            if (userData.ID == 1)
             {
-                return _database.UpdateAsync(userData);
+                return _database.InsertAsync(userData);
             }
             else
             {
-                return _database.InsertAsync(userData);
+                return _database.UpdateAsync(userData);
+                
             }
         }
     }

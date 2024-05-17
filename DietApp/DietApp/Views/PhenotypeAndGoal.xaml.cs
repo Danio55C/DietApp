@@ -21,7 +21,7 @@ namespace DietApp.Views
     public partial class PhenotypeAndGoal : ContentPage
     {
 
-        
+
         public PhenotypeAndGoal()
         {
             InitializeComponent();
@@ -32,16 +32,17 @@ namespace DietApp.Views
                             .Select(value => EnumHelper.GetDescription(value))
                             .ToList();
             goalPicker.ItemsSource = GoalList;
+
             BindingContext = new PhenotypeAndGoalViewModel();
             //BindingContext = new UserData();
-           
+
             LoadUserData();
 
 
 
         }
 
-       
+
 
         List<string> GenderList = new List<string>
         {
@@ -57,24 +58,25 @@ namespace DietApp.Views
 
         private async void LoadUserData()
         {
-           var userData= await App.Database.GetUserDataAsync();
+            var userData = await App.Database.GetUserDataAsync();
             try
             {
 
                 if (userData != null)
                 {
 
-                  genderPicker.SelectedItem = userData.Gender;
-                   weightEntry.Text = userData.CurrentWeight.ToString();
-                  heightEntry.Text = userData.Height.ToString();
+                    genderPicker.SelectedItem = userData.Gender;
+                    weightEntry.Text = userData.CurrentWeight.ToString();
+                    heightEntry.Text = userData.Height.ToString();
                     ageEntry.Text = userData.Age.ToString();
-               }
-           }
-          catch (Exception ex)
-          {
+                    tDEpicker.SelectedItem = userData.LifeStyleTDEE;
+                }
+            }
+            catch (Exception ex)
+            {
 
-              await DisplayAlert("Błąd", ex.ToString(), "cancel");
-          }
+                await DisplayAlert("Błąd", ex.ToString(), "cancel");
+            }
         }
 
         //async void OnSaveButtonClicked(object sender, EventArgs e)
@@ -113,27 +115,7 @@ namespace DietApp.Views
 
 
 
-        //        switch (tDEpicker.SelectedItem)
-        //    { 
-        //            case "Nieaktywny/siedzący: prawie brak aktywności w ciągu dnia":
-        //            userdate.ActivityIndex = 1.2;
-        //            break;
-        //            case "Lekki: 1-3 treningów w tygodniu, lub praca z lekką aktywnością":
-        //            userdate.ActivityIndex = 1.375;
-        //            break;
-        //            case "Średni: 3-5 treningów w tygodniu":
-        //            userdate.ActivityIndex = 1.55;
-        //            break;
-        //            case "Wysoki: 6-7 treningów w tygodniu":
-        //            userdate.ActivityIndex = 1.725;
-        //            break;
-        //            case "Bardzo Wysoki: Ciężka praca fizyczna lub treningi dwa razy w tygodniu":
-        //            userdate.ActivityIndex = 1.9;
-        //            break;
-        //        default:
-        //          await  DisplayAlert("bŁad", "Zlie wybrany Tryb życia", "cancel");
-        //            break;
-        //    }
+        //        
 
         //         App.Database.SaveUserData(userdate);
 

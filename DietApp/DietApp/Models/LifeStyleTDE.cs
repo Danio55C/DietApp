@@ -1,6 +1,6 @@
-﻿
+﻿using System.ComponentModel;
 
-using System.ComponentModel;
+
 
 namespace DietApp.Models
 {

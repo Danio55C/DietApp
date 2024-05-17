@@ -55,7 +55,7 @@
 
                 <Label Grid.ColumnSpan="2" Grid.Row="4" Text="Tryb życia" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" FontSize="Large"/>
 
-                <Picker Title="wybierz swój tryb życia" WidthRequest="400" Grid.Row="5" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" Grid.ColumnSpan="2" x:Name="tDEpicker" SelectedItem="{Binding PhenotypeAndGoalViewModel.ActivityIndex,  Mode=TwoWay}" ></Picker>
+                <Picker WidthRequest="400" Grid.Row="5" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" Grid.ColumnSpan="2" x:Name="tDEpicker" SelectedItem="{Binding PhenotypeAndGoalViewModel.LifeStyleTDEE,  Mode=TwoWay}" ></Picker>
 
                 <Button Grid.Row="6" Text="Save" Command="{Binding SaveCommand}"></Button>
 

@@ -9,14 +9,15 @@ namespace DietApp.Models
     {
         [PrimaryKey, AutoIncrement]
         public  int ID { get; set; }
-
         public int CurrentWeight { get; set; }
         public int Height { get; set; }
         public int Age { get; set; }
         public string Gender { get; set; }
+        public string LifeStyleTDEE { get; set; }
         public double ActivityIndex { get; set ; }
         
     }
+}
+
 
     
-}
