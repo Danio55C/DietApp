@@ -14,8 +14,8 @@ namespace DietApp.ViewModel
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        
 
+        public int ID { get; set; }
         public int CurrentWeight { get; set; }
         public int Height { get; set; }
         public int Age { get; set; }
@@ -27,6 +27,7 @@ namespace DietApp.ViewModel
         public PhenotypeAndGoalViewModel()
         {
             SaveCommand = new Command(OnSave);
+
         }
 
         private async void OnSave(object obj)
@@ -35,12 +36,13 @@ namespace DietApp.ViewModel
             {
                 var userData = new UserData
                 {
+                    ID=ID,
                     CurrentWeight = CurrentWeight,
                     Height = Height,
                     Age = Age,
                     Gender = Gender,
                     ActivityIndex = ActivityIndex
-
+                    
                 };
                 await App.Database.SaveUserDataAsync(userData);
                 await Application.Current.MainPage.DisplayAlert("Sukces", "$Twoje dane zostały zapisaneCZyli:", "OK");

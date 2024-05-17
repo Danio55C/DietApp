@@ -53,10 +53,10 @@ namespace DietApp.Data
         }
 
 
-        //public Task<List<UserData>> GetUserDataAsync()
-        //{
-        //    return _database.Table<UserData>().Where()
-        //}
+        public Task<UserData> GetUserDataAsync()
+        {
+            return _database.Table<UserData>().FirstOrDefaultAsync();
+        }
 
 
 

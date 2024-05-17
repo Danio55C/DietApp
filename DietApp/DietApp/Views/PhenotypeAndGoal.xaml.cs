@@ -21,7 +21,7 @@ namespace DietApp.Views
     public partial class PhenotypeAndGoal : ContentPage
     {
 
-
+        
         public PhenotypeAndGoal()
         {
             InitializeComponent();
@@ -32,10 +32,16 @@ namespace DietApp.Views
                             .Select(value => EnumHelper.GetDescription(value))
                             .ToList();
             goalPicker.ItemsSource = GoalList;
-
-            //BindingContext = new UserData();
             BindingContext = new PhenotypeAndGoalViewModel();
+            //BindingContext = new UserData();
+           
+            LoadUserData();
+
+
+
         }
+
+       
 
         List<string> GenderList = new List<string>
         {
@@ -47,8 +53,29 @@ namespace DietApp.Views
             "lose weight","gain weight","maintain weight"
         };
 
-        
 
+
+        private async void LoadUserData()
+        {
+           var userData= await App.Database.GetUserDataAsync();
+            try
+            {
+
+                if (userData != null)
+                {
+
+                  genderPicker.SelectedItem = userData.Gender;
+                   weightEntry.Text = userData.CurrentWeight.ToString();
+                  heightEntry.Text = userData.Height.ToString();
+                    ageEntry.Text = userData.Age.ToString();
+               }
+           }
+          catch (Exception ex)
+          {
+
+              await DisplayAlert("Błąd", ex.ToString(), "cancel");
+          }
+        }
 
         //async void OnSaveButtonClicked(object sender, EventArgs e)
         //{
@@ -59,15 +86,15 @@ namespace DietApp.Views
         //    catch (Exception ex)
         //    {
 
-        //       await DisplayAlert("Błąd",ex.ToString(),"cancel");
+        //        await DisplayAlert("Błąd", ex.ToString(), "cancel");
         //    }
-            
+
         //    //DisplayAlert("Ustawienia zapisano","twoje dane zostały zapisane" , "cancel");
         //}
 
-        
 
-        
+
+
 
         //async private void GetUsersData()
         //{
@@ -107,16 +134,16 @@ namespace DietApp.Views
         //          await  DisplayAlert("bŁad", "Zlie wybrany Tryb życia", "cancel");
         //            break;
         //    }
-               
+
         //         App.Database.SaveUserData(userdate);
-                
+
         //   await DisplayAlert("Dobrze", $"płeć: {userdate.Gender}, waga:{userdate.CurrentWeight}, wzrost: {userdate.Height}, wiek:{userdate.Age}, index:{userdate.ActivityIndex}", "cancel");
 
-                
-               
-                
+
+
+
         //    }
-           
+
         //     catch (Exception ex)
         //    {
 
@@ -137,7 +164,7 @@ namespace DietApp.Views
         //    {
 
         //        var userdate = (UserData)BindingContext;
-                
+
         //        DisplayAlert("Baza danych", $"płeć: {userdate.Gender}, waga:{userdate.CurrentWeight}, wzrost: {userdate.Height}, wiek:{userdate.Age}, index:{userdate.ActivityIndex}", "cancel");
         //    }
         //    catch (Exception ex)
@@ -145,8 +172,8 @@ namespace DietApp.Views
 
         //         DisplayAlert("Błąd", ex.ToString(), "cancel");
         //    }
-            
-            
+
+
         //}
 
 
