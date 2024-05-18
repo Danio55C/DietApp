@@ -27,7 +27,7 @@
                     <RowDefinition/>
                     <RowDefinition/>
                     <RowDefinition/>
-                    <RowDefinition/>
+                   
                 </Grid.RowDefinitions>
 
                 <Grid.ColumnDefinitions>
@@ -57,19 +57,20 @@
 
                 <Picker WidthRequest="400" Grid.Row="5" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" Grid.ColumnSpan="2" x:Name="tDEpicker" SelectedItem="{Binding PhenotypeAndGoalViewModel.LifeStyleTDEE,  Mode=TwoWay}" ></Picker>
 
-                <Button Grid.Row="6" Text="Save" Command="{Binding SaveCommand}"></Button>
-
-                <Button Grid.Row="6" Grid.Column="1" Text="Edit"  ></Button> 
+                <Label Grid.Row="6" Grid.ColumnSpan="2" Text="Your goal" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" FontSize="Title"/>
 
                 
-                <Label Grid.Row="8" Grid.ColumnSpan="2" Text="Your goal" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" FontSize="Title"/>
 
-                <Label Grid.Row="9" Text="Cel" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" FontSize="Large"/>
+                <Picker   Grid.Row="7" HorizontalOptions="CenterAndExpand" VerticalOptions="Center"  Grid.ColumnSpan="2" x:Name="goalPicker" SelectedItem="{Binding PhenotypeAndGoalViewModel.UserGoal}" ></Picker>
+                
+                <Button Grid.Row="9" Text="Save" Command="{Binding SavePhenotypeCommand}"></Button>
 
-                <Picker   Grid.Row="9" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" Grid.Column="1"  x:Name="goalPicker" ></Picker>
+                <Button Grid.Row="9" Grid.Column="1" Text="Edit"  ></Button> 
 
-                <Button Grid.Row="10" WidthRequest="250" Grid.ColumnSpan="2" HorizontalOptions="Center" Text="Save Goal"  ></Button>
-                <Label Grid.Row="11 " WidthRequest="250" Grid.ColumnSpan="2" HorizontalOptions="Center"   x:Name="testLabel" Text="{Binding CurrentWeight}" ></Label>
+                
+
+                
+                
                 
 
             </Grid>

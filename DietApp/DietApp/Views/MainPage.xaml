@@ -39,7 +39,7 @@
         </Label>
         <Button Grid.Column="1"  Grid.Row="2" Text="Change your goal"
     Clicked="OnButtonClicked"  HorizontalOptions="End"/>
-        <Label Grid.Row="2" x:Name="userDataListView" Text="costam" VerticalOptions="Center" />
+        <Label Grid.Row="2" x:Name="userDataListView"  VerticalOptions="Center"  Text="{Binding PhenotypeAndGoalViewModel.UserGoal}"/>
         <!-- Layout children vertically -->
         <StackLayout Grid.Row="3" Margin="20" Grid.ColumnSpan="2"
                             Spacing="10">

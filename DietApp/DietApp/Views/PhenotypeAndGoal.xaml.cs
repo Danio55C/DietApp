@@ -20,8 +20,6 @@ namespace DietApp.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class PhenotypeAndGoal : ContentPage
     {
-
-
         public PhenotypeAndGoal()
         {
             InitializeComponent();
@@ -37,8 +35,6 @@ namespace DietApp.Views
             //BindingContext = new UserData();
 
             LoadUserData();
-
-
 
         }
 
@@ -70,6 +66,8 @@ namespace DietApp.Views
                     heightEntry.Text = userData.Height.ToString();
                     ageEntry.Text = userData.Age.ToString();
                     tDEpicker.SelectedItem = userData.LifeStyleTDEE;
+                    goalPicker.SelectedItem = userData.UserGoal;
+                    //testLabel.Text = userData.ActivityIndex.ToString();
                 }
             }
             catch (Exception ex)
@@ -78,98 +76,11 @@ namespace DietApp.Views
                 await DisplayAlert("Błąd", ex.ToString(), "cancel");
             }
         }
-
-        //async void OnSaveButtonClicked(object sender, EventArgs e)
-        //{
-        //    try
-        //    {
-        //        GetUsersData();
-        //    }
-        //    catch (Exception ex)
-        //    {
-
-        //        await DisplayAlert("Błąd", ex.ToString(), "cancel");
-        //    }
-
-        //    //DisplayAlert("Ustawienia zapisano","twoje dane zostały zapisane" , "cancel");
-        //}
-
-
-
-
-
-        //async private void GetUsersData()
-        //{
-        //    try
-        //    {
-
-        //        var userdate = (UserData)BindingContext;
-        //        //userdate.ID = 1;
-        //        //userdate.Gender = (string)genderPicker.SelectedItem;
-        //        //userdate.CurrentWeight = int.Parse(weightEntry.Text);
-        //        //userdate.Height = int.Parse(heightEntry.Text);
-        //        //userdate.Age = int.Parse(ageEntry.Text);
-
-
-
-
-
-
-        //        
-
-        //         App.Database.SaveUserData(userdate);
-
-        //   await DisplayAlert("Dobrze", $"płeć: {userdate.Gender}, waga:{userdate.CurrentWeight}, wzrost: {userdate.Height}, wiek:{userdate.Age}, index:{userdate.ActivityIndex}", "cancel");
-
-
-
-
-        //    }
-
-        //     catch (Exception ex)
-        //    {
-
-        //       await DisplayAlert("Błąd", ex.ToString(), "cancel");
-        //    }
-        //}
-
-
-
-        //private void OnSaveGoalButtonClicked(object sender, EventArgs e)
-        //{
-        //    UserGoal usergoal = new UserGoal();
-        //    usergoal.Goal = (string)goalPicker.SelectedItem;
-        //}
-        //private void OnEdditButtonClicked(object sender, EventArgs e)
-        //{
-        //    try
-        //    {
-
-        //        var userdate = (UserData)BindingContext;
-
-        //        DisplayAlert("Baza danych", $"płeć: {userdate.Gender}, waga:{userdate.CurrentWeight}, wzrost: {userdate.Height}, wiek:{userdate.Age}, index:{userdate.ActivityIndex}", "cancel");
-        //    }
-        //    catch (Exception ex)
-        //    {
-
-        //         DisplayAlert("Błąd", ex.ToString(), "cancel");
-        //    }
-
-
-        //}
-
-
-
-
-
-
-
-
-
-
-
-
-
-        //zbinduj wiek wzrost i wage dodaj liste goal oraz tryb życia
     }
 }
+
+
+
+
+
+        

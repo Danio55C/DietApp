@@ -15,6 +15,7 @@ namespace DietApp.Models
         public string Gender { get; set; }
         public string LifeStyleTDEE { get; set; }
         public double ActivityIndex { get; set ; }
+        public string UserGoal { get; set ; }
         
     }
 }

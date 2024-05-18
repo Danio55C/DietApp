@@ -14,14 +14,16 @@ namespace DietApp.Views
             
         }
 
-        //protected override async void OnAppearing()
-        //{
-            
+        protected override async void OnAppearing()
+        {
 
 
-
-        //}
-
+            var userData = await App.Database.GetUserDataAsync();
+            if (userData != null)
+            {
+                userDataListView.Text = userData.UserGoal;
+            }
+        }
         async void OnButtonClicked(object sender, EventArgs e)
         {
            
