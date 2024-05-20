@@ -16,14 +16,14 @@ namespace DietApp.Models
         public string LifeStyleTDEE { get; set; }
         public double ActivityIndex { get; set; }
         public string UserGoal { get; set; }
-        public double TDEE => CalcutaeTDEE();
+        public int TDEE => CalcutaeTDEE();
 
-        private double CalcutaeTDEE()
+        private int CalcutaeTDEE()
         {
             if (Gender == "Male")
-                return ActivityIndex * (1.1 * (10 * CurrentWeight + 6.26 * Height - 5 * Age + 5));
+                return (int)Math.Ceiling( ActivityIndex * (1.1 * (10 * CurrentWeight + 6.26 * Height - 5 * Age + 5)));
             else
-                return ActivityIndex * (1.1 * (10 * CurrentWeight + 6.26 * Height - 5 * Age - 161));
+                return (int)Math.Ceiling(ActivityIndex * (1.1 * (10 * CurrentWeight + 6.26 * Height - 5 * Age - 161)));
         }
     }
 }

@@ -38,13 +38,13 @@ namespace DietApp.Models
                 case "lose weight":
                     var carbsLose = (int)Math.Ceiling(userData.CurrentWeight * 2.2);
                     var proteinLose = (int)Math.Ceiling(userData.CurrentWeight * 2.2);
-                    var totalCaloriesLose = (int)Math.Ceiling(userData.TDEE - 100);
-                    var fatsLose = (int)Math.Ceiling((userData.TDEE - 100 - (carbsLose / 4 + proteinLose / 4)) / 9);
+                    var totalCaloriesLose = userData.TDEE - 100;
+                    var fatsLose =userData.TDEE - 100 - (carbsLose / 4 + proteinLose / 4) / 9;
                     return (carbsLose, fatsLose, proteinLose, totalCaloriesLose);
 
                 case "maintain weight":
                     var proteinMaintain = (int)Math.Ceiling(userData.CurrentWeight * 2.2);
-                    var totalCaloriesMaintain = (int)Math.Ceiling(userData.TDEE);
+                    var totalCaloriesMaintain =userData.TDEE;
                     var carbsMaintain = (totalCaloriesMaintain / 2 * 4);
                     var fatsMaintain = (totalCaloriesMaintain / 2 * 9);
                     return (carbsMaintain, fatsMaintain, proteinMaintain, totalCaloriesMaintain);
