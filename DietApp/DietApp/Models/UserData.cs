@@ -8,17 +8,32 @@ namespace DietApp.Models
     public class UserData
     {
         [PrimaryKey, AutoIncrement]
-        public  int ID { get; set; }
+        public int ID { get; set; }
         public int CurrentWeight { get; set; }
         public int Height { get; set; }
         public int Age { get; set; }
         public string Gender { get; set; }
         public string LifeStyleTDEE { get; set; }
-        public double ActivityIndex { get; set ; }
-        public string UserGoal { get; set ; }
-        
+        public double ActivityIndex { get; set; }
+        public string UserGoal { get; set; }
+        public double TDEE => CalcutaeTDEE();
+
+        private double CalcutaeTDEE()
+        {
+            if (Gender == "Male")
+                return ActivityIndex * (1.1 * (10 * CurrentWeight + 6.26 * Height - 5 * Age + 5));
+            else
+                return ActivityIndex * (1.1 * (10 * CurrentWeight + 6.26 * Height - 5 * Age - 161));
+        }
     }
 }
 
 
-    
+
+
+
+
+
+
+
+

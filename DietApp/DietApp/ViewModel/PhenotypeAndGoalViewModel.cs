@@ -22,7 +22,7 @@ namespace DietApp.ViewModel
         public string Gender { get; set; }
         public string LifeStyleTDEE { get; set; }
         public string UserGoal { get; set; }
-
+        
 
         public ICommand SavePhenotypeCommand { get; private set; }
        
@@ -48,10 +48,13 @@ namespace DietApp.ViewModel
                     LifeStyleTDEE = LifeStyleTDEE,
                     ActivityIndex=ConvertActivityIndex(LifeStyleTDEE),
                     UserGoal=UserGoal
+                    
+
 
                 };
                 await App.Database.SaveUserDataAsync(userData);
                 await Application.Current.MainPage.DisplayAlert("Sukces", "Twoje dane zostały zapisane", "OK");
+                await Application.Current.MainPage.DisplayAlert("Test", $"{userData.TDEE}", "cancel");
             }
             catch (Exception ex)
             {
