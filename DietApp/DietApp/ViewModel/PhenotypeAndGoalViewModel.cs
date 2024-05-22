@@ -55,13 +55,18 @@ namespace DietApp.ViewModel
                 await App.Database.SaveUserDataAsync(userData);
                 await Application.Current.MainPage.DisplayAlert("Sukces", "Twoje dane zostały zapisane", "OK");
                 await Application.Current.MainPage.DisplayAlert("Test", $"{userData.TDEE}", "cancel");
+               
+
+
+
+
             }
             catch (Exception ex)
             {
 
                 await Application.Current.MainPage.DisplayAlert("bŁąd", ex.ToString(), "OK");
             }
-
+            
         }
 
         

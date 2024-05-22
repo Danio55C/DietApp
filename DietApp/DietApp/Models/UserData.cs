@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using SQLite;
 
 namespace DietApp.Models
@@ -16,15 +17,16 @@ namespace DietApp.Models
         public string LifeStyleTDEE { get; set; }
         public double ActivityIndex { get; set; }
         public string UserGoal { get; set; }
-        public int TDEE => CalcutaeTDEE();
+        public int TDEE => CalcuteTDEE();
 
-        private int CalcutaeTDEE()
+        private int CalcuteTDEE()
         {
             if (Gender == "Male")
                 return (int)Math.Ceiling( ActivityIndex * (1.1 * (10 * CurrentWeight + 6.26 * Height - 5 * Age + 5)));
             else
                 return (int)Math.Ceiling(ActivityIndex * (1.1 * (10 * CurrentWeight + 6.26 * Height - 5 * Age - 161)));
         }
+       
     }
 }
 

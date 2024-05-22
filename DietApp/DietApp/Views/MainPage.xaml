@@ -65,7 +65,7 @@
 
                 </Grid.RowDefinitions>
 
-                <Label Grid.Row="1" FontSize="20" Text="Colories      0/x"></Label>
+                <Label Grid.Row="1" FontSize="20" x:Name="caloriesLabel" ></Label>
                 <ProgressBar  Grid.Row="2" ProgressColor="YellowGreen" Progress="0.1"></ProgressBar>
 
                 <Label Grid.Row="3" FontSize="20"  Text="Carbs      0/x"></Label>

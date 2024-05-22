@@ -14,6 +14,7 @@ namespace DietApp.Data
             _database = new SQLiteAsyncConnection(dbPath);
             _database.CreateTableAsync<Recepie>().Wait();
             _database.CreateTableAsync<UserData>().Wait();
+            _database.CreateTableAsync<UserMacros>().Wait();
         }
 
         
@@ -58,7 +59,10 @@ namespace DietApp.Data
             return _database.Table<UserData>().FirstOrDefaultAsync();
         }
 
-
+        public Task<UserMacros> GetUserMacrosAsync()
+        {
+            return _database.Table<UserMacros>().FirstOrDefaultAsync();
+        }
 
 
         //public async Task<UserData> GetSettingAsync()
@@ -66,7 +70,18 @@ namespace DietApp.Data
         //    return await _database.Table<UserData>().Where(x=>x.ID==1)
         //}
 
-        
+        public Task<int> SaveUserMacrosAsync(UserMacros userMacros)
+        {
+            if (userMacros.ID == 1)
+            {
+                return _database.InsertAsync(userMacros);
+            }
+            else
+            {
+                return _database.UpdateAsync(userMacros);
+
+            }
+        }
 
         public Task<int> SaveUserDataAsync(UserData userData)
         {
@@ -80,5 +95,6 @@ namespace DietApp.Data
                 
             }
         }
+        
     }
 }
