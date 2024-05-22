@@ -12,8 +12,8 @@ namespace DietApp.Views
         public MainPage()
         {
             InitializeComponent();
-           var userMacros= 
-            
+            BindingContext = new UserMacros();
+            LoadUserMacors();
         }
 
         protected override async void OnAppearing()
@@ -27,17 +27,12 @@ namespace DietApp.Views
             {
                 userDataListView.Text = userData.UserGoal;
             }
-
-                var userMacros = await App.Database.GetUserMacrosAsync();
                 
                 
-
-                if (userMacros != null)
-                {
-
-                    caloriesLabel.Text = userMacros.DailyCaloricLimit.ToString();
-                }
-                await Application.Current.MainPage.DisplayAlert("calorie", userMacros.DailyCaloricLimit.ToString() , "OK");
+                
+              
+               
+                
             }
             catch (Exception ex )
             {
@@ -54,6 +49,25 @@ namespace DietApp.Views
             await Shell.Current.GoToAsync(nameof(PhenotypeAndGoal));
         }
 
+        private async void LoadUserMacors()
+        {
+            var userMacros = await App.Database.GetUserMacrosAsync();
+            try
+            {
 
+                if (userMacros != null)
+                {
+                    caloriesLabel.Text = userMacros.DailyCaloricLimit.ToString();
+                   
+                }
+
+                await Application.Current.MainPage.DisplayAlert("calorie", userMacros.DailyCaloricLimit.ToString(), "OK");
+            }
+            catch (Exception ex)
+            {
+
+                await DisplayAlert("Błąd", ex.ToString(), "cancel");
+            }
+        }
     }
 }

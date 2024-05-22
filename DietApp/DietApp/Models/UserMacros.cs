@@ -8,11 +8,7 @@ namespace DietApp.Models
 {
     public class UserMacros
     {
-        public UserMacros()
-        {
-           
-
-        }
+        
 
         [PrimaryKey, AutoIncrement]
         public int ID { get; set; }
@@ -63,9 +59,9 @@ namespace DietApp.Models
 
                 default:
                     return (0, 0, 0, 0);
-
             }
         }
+
 
         public async Task SaveMacrosAsync()
         {
