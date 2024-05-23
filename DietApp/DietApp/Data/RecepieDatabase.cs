@@ -2,6 +2,8 @@
 using System.Threading.Tasks;
 using SQLite;
 using DietApp.Models;
+using System.Diagnostics;
+using System;
 
 namespace DietApp.Data
 {
@@ -70,19 +72,40 @@ namespace DietApp.Data
         //    return await _database.Table<UserData>().Where(x=>x.ID==1)
         //}
 
-        public Task<int> SaveUserMacrosAsync(UserMacros userMacros)
-        {
-            if (userMacros.ID == 1)
-            {
-                return _database.InsertAsync(userMacros);
-            }
-            else
-            {
-                return _database.UpdateAsync(userMacros);
+        //public Task<int> SaveUserMacrosAsync(UserMacros userMacros)
+        //{
+        //    if (userMacros.ID == 1)
+        //    {
+        //        return _database.InsertAsync(userMacros);
+        //    }
+        //    else
+        //    {
+        //        return _database.UpdateAsync(userMacros);
 
+        //    }
+        //}
+        public async Task SaveUserMacrosAsync(UserMacros userMacros)
+        {
+            try
+            {
+                var existingUserMacros = await GetUserMacrosAsync();
+                if (existingUserMacros != null)
+                {
+                    userMacros.ID = existingUserMacros.ID; // Zakładając, że Id jest kluczem głównym
+                    await _database.UpdateAsync(userMacros);
+                }
+                else
+                {
+                    await _database.InsertAsync(userMacros);
+                }
+
+                Debug.WriteLine("User macros saved successfully.");
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Error saving user macros: {ex.Message}");
             }
         }
-
         public Task<int> SaveUserDataAsync(UserData userData)
         {
             if (userData.ID == 1)

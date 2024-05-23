@@ -2,6 +2,7 @@
 using DietApp.Models;
 using DietApp.Views;
 using System;
+using System.Threading.Tasks;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
@@ -13,7 +14,7 @@ namespace DietApp.Views
         {
             InitializeComponent();
             BindingContext = new UserMacros();
-            LoadUserMacors();
+            
         }
 
         protected override async void OnAppearing()
@@ -27,21 +28,16 @@ namespace DietApp.Views
             {
                 userDataListView.Text = userData.UserGoal;
             }
-                
-                
-                
-              
-               
-                
+
+             await  LoadUserMacros();
+
             }
             catch (Exception ex )
             {
 
                 await Application.Current.MainPage.DisplayAlert("bŁąd", ex.ToString(), "OK");
             }
-
-
-
+                
         }
         async void OnButtonClicked(object sender, EventArgs e)
         {
@@ -49,25 +45,39 @@ namespace DietApp.Views
             await Shell.Current.GoToAsync(nameof(PhenotypeAndGoal));
         }
 
-        private async void LoadUserMacors()
+        private async Task LoadUserMacros()
         {
-            var userMacros = await App.Database.GetUserMacrosAsync();
             try
             {
+                var userMacros = await App.Database.GetUserMacrosAsync();
 
                 if (userMacros != null)
                 {
-                    caloriesLabel.Text = userMacros.DailyCaloricLimit.ToString();
-                   
-                }
+                    
+                        caloriesLabel.Text = $"Calories: {userMacros.DailyCaloricLimit} kcal";
+                        carbsLabel.Text = $"Carbs: {userMacros.DailyCarbsLimit} grams";
+                        proteinLabel.Text = $"Protein: {userMacros.DailyProteinLimit} grams";
+                        fatsLabel.Text = $"Fats: {userMacros.DailyFatsLimit} grams";
 
-                await Application.Current.MainPage.DisplayAlert("calorie", userMacros.DailyCaloricLimit.ToString(), "OK");
+
+
+
+                }
+                else
+                {
+                    await Application.Current.MainPage.DisplayAlert("Info", "No user macros found", "OK");
+                }
             }
             catch (Exception ex)
             {
-
                 await DisplayAlert("Błąd", ex.ToString(), "cancel");
             }
         }
     }
 }
+                
+              
+               
+                
+
+

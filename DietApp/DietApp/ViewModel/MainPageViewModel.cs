@@ -10,13 +10,13 @@ namespace DietApp.ViewModel
     public class MainPageViewModel
     {
         public int ID { get; set; }
-        public int DailyCaloricLimit { get; }
+        public int DailyCaloricLimit { get; set; }
         //public int CaloriesConsumed { get; set; }
-        public int DailyCarbsLimit { get; }
+        public int DailyCarbsLimit { get; set; }
        // public int CarbsConsumed { get; set; }
-        public int DailyProteinLimit { get; }
+        public int DailyProteinLimit { get; set; }
        // public int ProteinConsumed { get; set; }
-        public int DailyFatsLimit { get; }
+        public int DailyFatsLimit { get; set; }
         //public int FatsConsumed { get; set; }
 
         public MainPageViewModel()

@@ -56,8 +56,8 @@ namespace DietApp.ViewModel
                 await Application.Current.MainPage.DisplayAlert("Sukces", "Twoje dane zostały zapisane", "OK");
                 await Application.Current.MainPage.DisplayAlert("Test", userData.TDEE.ToString(), "cancel");
 
-                var userMacros = new UserMacros();
-                await userMacros.SaveMacrosAsync();
+                //var userMacros = new UserMacros();
+                //await userMacros.SaveMacrosAsync();
             }
             catch (Exception ex)
             {

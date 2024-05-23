@@ -68,13 +68,13 @@
                 <Label Grid.Row="1" FontSize="20" x:Name="caloriesLabel" Text="{Binding UserMacros.DailyCaloricLimit}" ></Label>
                 <ProgressBar  Grid.Row="2" ProgressColor="YellowGreen" Progress="0.1"></ProgressBar>
 
-                <Label Grid.Row="3" FontSize="20"  Text="Carbs      0/x"></Label>
+                <Label Grid.Row="3" FontSize="20"  x:Name="carbsLabel" Text="{Binding UserMacros.DailyCarbsLimit}"></Label>
                 <ProgressBar  Grid.Row="4" ProgressColor="BurlyWood"  Progress="0.1"></ProgressBar>
 
-                <Label  Grid.Row="5" FontSize="20" Text="Protein      0/x"></Label>
+                <Label  Grid.Row="5" FontSize="20" x:Name="proteinLabel" Text="{Binding UserMacros.DailyProteinLimit}"   ></Label>
                 <ProgressBar  Grid.Row="6" ProgressColor="WhiteSmoke"  Progress="0.1"></ProgressBar>
 
-                <Label FontSize="20" Grid.Row="7"  Text="Fats      0/x"></Label>
+                <Label FontSize="20" Grid.Row="7"  x:Name="fatsLabel"     ></Label>
                 <ProgressBar  Grid.Row="8" ProgressColor="Brown" Progress="0.1"></ProgressBar>
 
                 <Button  Grid.Row ="9" Text="Add a meal"></Button>
