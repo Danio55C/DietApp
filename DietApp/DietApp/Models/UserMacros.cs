@@ -41,10 +41,10 @@ namespace DietApp.Models
             {
                 //to do poprawy
                 case "gain weight":
-                    var carbsGain = (int)Math.Ceiling(userData.CurrentWeight * 2.2 * 2);
-                    var proteinGain = (int)Math.Ceiling(userData.CurrentWeight * 2.2);
-                    var fatsGain = (int)Math.Ceiling(userData.CurrentWeight * 2.2 * 0.75);
-                    var totalCaloriesGain = ((carbsGain * 4) + (fatsGain * 9) + (proteinGain * 4));
+                    var carbsGain = (int)Math.Ceiling(userData.CurrentWeight * 2.2 * 2 );
+                    var proteinGain = (int)Math.Ceiling(userData.CurrentWeight * 2.2 );
+                    var fatsGain = (int)Math.Ceiling(userData.CurrentWeight * 2.2 * 0.75 );
+                    var totalCaloriesGain =((carbsGain * 4) + (fatsGain * 9) + (proteinGain * 4));
                     return (carbsGain, fatsGain, proteinGain, totalCaloriesGain);
 
                 case "lose weight":
