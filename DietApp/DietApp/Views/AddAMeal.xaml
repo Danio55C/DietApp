@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="DietApp.Views.AddAMeal">
+             x:Class="DietApp.Views.AddAMeal"
+             Title="Add a Meal">
     <ContentPage.Content>
         <StackLayout Margin="20"
                             Spacing="8">
@@ -40,9 +41,13 @@
 
                 <Entry Grid.Row="3" Grid.Column="1" ></Entry>
 
+
+            
+
+
                 <Label Grid.Row="4"   Text="calories (kcal)" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" />
 
-                <Entry Grid.Row="4" Grid.Column="1" Keyboard="Numeric" ></Entry>
+              <Entry Grid.Row="4" Grid.Column="1" Keyboard="Numeric" ></Entry>
 
                 <Label Grid.Row="5"   Text="carbs (grams)" HorizontalOptions="CenterAndExpand" VerticalOptions="Center"/>
 
@@ -73,14 +78,14 @@
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                     
-                    
-                    
                 </CollectionView>
-
             </Grid>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
+
+                    
+                    
 
 
                                

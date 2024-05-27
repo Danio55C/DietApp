@@ -12,9 +12,9 @@ namespace DietApp.Views
     {
         public MainPage()
         {
-            InitializeComponent();
+           
             BindingContext = new UserMacros();
-            
+            InitializeComponent();
         }
 
         protected override async void OnAppearing()
@@ -22,8 +22,8 @@ namespace DietApp.Views
              
             try
             {
-
-            var userData = await App.Database.GetUserDataAsync();
+               
+                var userData = await App.Database.GetUserDataAsync();
             if (userData != null)
             {
                 userDataListView.Text = userData.UserGoal;

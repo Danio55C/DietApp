@@ -80,9 +80,9 @@ namespace DietApp.Models
         }
         public async Task SaveMacrosAsync()
         {
-
             await App.Database.SaveUserMacrosAsync(this);
         }
+
 
 
     }

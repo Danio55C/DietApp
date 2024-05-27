@@ -17,6 +17,7 @@ namespace DietApp.Data
             _database.CreateTableAsync<Recepie>().Wait();
             _database.CreateTableAsync<UserData>().Wait();
             _database.CreateTableAsync<UserMacros>().Wait();
+            _database.CreateTableAsync<Meal>().Wait();
         }
 
         
