@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="DietApp.Views.AddAMeal">
+    <ContentPage.Content>
+        <StackLayout Margin="20"
+                            Spacing="8">
+            <Grid >
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+
+
+
+                <Label  Grid.Row="0" Grid.ColumnSpan="2" Text="Add a New Meal" FontSize="Title" HorizontalTextAlignment="Center" HorizontalOptions="CenterAndExpand" VerticalOptions="Center"
+                />
+                <Label Grid.Row="1"  Grid.ColumnSpan="2"
+                           Text="product/meal name" HorizontalOptions="CenterAndExpand" VerticalOptions="Center"/>
+
+                <Entry Grid.Row="2" Grid.ColumnSpan="2" Placeholder="enter product name" ></Entry>
+
+                <Label Grid.Row="3" Text="type" HorizontalOptions="CenterAndExpand" VerticalOptions="Center"/>
+
+
+                <Entry Grid.Row="3" Grid.Column="1" ></Entry>
+
+                <Label Grid.Row="4"   Text="calories (kcal)" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" />
+
+                <Entry Grid.Row="4" Grid.Column="1" Keyboard="Numeric" ></Entry>
+
+                <Label Grid.Row="5"   Text="carbs (grams)" HorizontalOptions="CenterAndExpand" VerticalOptions="Center"/>
+
+                <Entry Grid.Row="5" Grid.Column="1" Keyboard="Numeric" ></Entry>
+
+                <Label Grid.Row="6" Text="protein (grams)" HorizontalOptions="CenterAndExpand" VerticalOptions="Center"/>
+
+                <Entry Grid.Row="6" Grid.Column="1" Keyboard="Numeric" ></Entry>
+
+                <Label Grid.Row="7" Text="fats (grams)" HorizontalOptions="CenterAndExpand" VerticalOptions="Center"/>
+
+                <Entry Grid.Row="7" Grid.Column="1" Keyboard="Numeric" ></Entry>
+
+                <Button Grid.Row="8" Text="Add"></Button>
+                <Button Grid.Row="8" Text="Cancel" Grid.Column="1"></Button>
+
+                <CollectionView x:Name="mealCollectionView" Grid.Row="9">
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Vertical"
+                       ItemSpacing="10" />
+                    </CollectionView.ItemsLayout>
+
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout>
+                                <Label Text="costam"  FontSize="Medium"/>
+                            </StackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                    
+                    
+                    
+                </CollectionView>
+
+            </Grid>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
+
+
+                               
+
+
+
+
+

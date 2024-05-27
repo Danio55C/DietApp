@@ -39,10 +39,15 @@ namespace DietApp.Views
             }
                 
         }
-        async void OnButtonClicked(object sender, EventArgs e)
+        async void OnChangeGoalButtonClicked(object sender, EventArgs e)
         {
            
             await Shell.Current.GoToAsync(nameof(PhenotypeAndGoal));
+        }
+        async void OnAddaMealButtonClicked(object sender, EventArgs e)
+        {
+
+            await Shell.Current.GoToAsync(nameof(AddAMeal));
         }
 
         private async Task LoadUserMacros()
@@ -54,13 +59,10 @@ namespace DietApp.Views
                 if (userMacros != null)
                 {
                     
-                        caloriesLabel.Text = $"Calories: {userMacros.DailyCaloricLimit} kcal";
-                        carbsLabel.Text = $"Carbs: {userMacros.DailyCarbsLimit} grams";
-                        proteinLabel.Text = $"Protein: {userMacros.DailyProteinLimit} grams";
-                        fatsLabel.Text = $"Fats: {userMacros.DailyFatsLimit} grams";
-
-
-
+                        caloriesLabel.Text = $"Calories= {userMacros.CaloriesConsumed}/{userMacros.DailyCaloricLimit} kcal";
+                        carbsLabel.Text = $"Carbs= {userMacros.CarbsConsumed}/{userMacros.DailyCarbsLimit} grams";
+                        proteinLabel.Text = $"Protein= {userMacros.ProteinConsumed}/{userMacros.DailyProteinLimit} grams";
+                        fatsLabel.Text = $"Fats= {userMacros.FatsConsumed}/{userMacros.DailyFatsLimit} grams";
 
                 }
                 else
@@ -77,6 +79,9 @@ namespace DietApp.Views
 }
                 
               
+
+
+
                
                 
 
