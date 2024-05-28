@@ -4,22 +4,21 @@
              x:Class="DietApp.Views.AddAMeal"
              Title="Add a Meal">
     <ContentPage.Content>
-        <StackLayout Margin="20"
-                            Spacing="8">
+        <StackLayout Margin="5"
+                            Spacing="5">
             <Grid >
-                <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
+                <Grid.RowDefinitions >
+                    <RowDefinition Height="0.07*"/>
+                    <RowDefinition Height="0.06*"/>
+                    <RowDefinition Height="0.06*"/>
+                    <RowDefinition Height="0.06*"/>
+                    <RowDefinition Height="0.06*"/>
+                    <RowDefinition Height="0.06*"/>
+                    <RowDefinition Height="0.07*"/>
+                    <RowDefinition Height="0.05*"/>
+                    <RowDefinition Height="0.5*"/>
+                    
+                    
                 </Grid.RowDefinitions>
 
                 <Grid.ColumnDefinitions>
@@ -27,44 +26,35 @@
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
 
+                <Entry Grid.Row="0" Grid.ColumnSpan="2" Placeholder="enter product name" Text="{Binding MealName}" ></Entry>
+
+                <Label Grid.Row="1" Text="type" HorizontalOptions="CenterAndExpand" VerticalOptions="Center"/>
 
 
-                <Label  Grid.Row="0" Grid.ColumnSpan="2" Text="Add a New Meal" FontSize="Title" HorizontalTextAlignment="Center" HorizontalOptions="CenterAndExpand" VerticalOptions="Center"
-                />
-                <Label Grid.Row="1"  Grid.ColumnSpan="2"
-                           Text="product/meal name" HorizontalOptions="CenterAndExpand" VerticalOptions="Center"/>
+                <Entry Grid.Row="1" Grid.Column="1" Text="{Binding MealType}" ></Entry>
 
-                <Entry Grid.Row="2" Grid.ColumnSpan="2" Placeholder="enter product name" ></Entry>
+               <Label Grid.Row="2"   Text="calories (kcal)" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" />
 
-                <Label Grid.Row="3" Text="type" HorizontalOptions="CenterAndExpand" VerticalOptions="Center"/>
+                <Entry Grid.Row="2" Grid.Column="1" Keyboard="Numeric" Text="{Binding MealCalories}"></Entry>
 
+                <Label Grid.Row="3"   Text="carbs (grams)" HorizontalOptions="CenterAndExpand" VerticalOptions="Center"/>
 
-                <Entry Grid.Row="3" Grid.Column="1" ></Entry>
+                <Entry Grid.Row="3" Grid.Column="1" Keyboard="Numeric" Text="{Binding MealCarbs}" ></Entry>
 
+                <Label Grid.Row="4" Text="protein (grams)" HorizontalOptions="CenterAndExpand" VerticalOptions="Center"/>
 
-            
+                <Entry Grid.Row="4" Grid.Column="1" Keyboard="Numeric" Text="{Binding MealProtein}"></Entry>
 
+                <Label Grid.Row="5" Text="fats (grams)" HorizontalOptions="CenterAndExpand" VerticalOptions="Center"/>
 
-                <Label Grid.Row="4"   Text="calories (kcal)" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" />
+                <Entry Grid.Row="5" Grid.Column="1" Keyboard="Numeric" Text="{Binding MealFats}"></Entry>
 
-              <Entry Grid.Row="4" Grid.Column="1" Keyboard="Numeric" ></Entry>
+                <Button Grid.Row="6" Text="Add" Clicked="OnAddMealButtonClicked"></Button>
+                <Button Grid.Row="6" Text="Cancel" Grid.Column="1"></Button>
 
-                <Label Grid.Row="5"   Text="carbs (grams)" HorizontalOptions="CenterAndExpand" VerticalOptions="Center"/>
+                <Label Grid.Row="7" Grid.ColumnSpan="2" Text="recently used" FontSize="Medium" HorizontalOptions="CenterAndExpand"></Label>
 
-                <Entry Grid.Row="5" Grid.Column="1" Keyboard="Numeric" ></Entry>
-
-                <Label Grid.Row="6" Text="protein (grams)" HorizontalOptions="CenterAndExpand" VerticalOptions="Center"/>
-
-                <Entry Grid.Row="6" Grid.Column="1" Keyboard="Numeric" ></Entry>
-
-                <Label Grid.Row="7" Text="fats (grams)" HorizontalOptions="CenterAndExpand" VerticalOptions="Center"/>
-
-                <Entry Grid.Row="7" Grid.Column="1" Keyboard="Numeric" ></Entry>
-
-                <Button Grid.Row="8" Text="Add"></Button>
-                <Button Grid.Row="8" Text="Cancel" Grid.Column="1"></Button>
-
-                <CollectionView x:Name="mealCollectionView" Grid.Row="9">
+                <CollectionView x:Name="mealCollectionView" Grid.Row="8" Grid.ColumnSpan="2"  >
                     <CollectionView.ItemsLayout>
                         <LinearItemsLayout Orientation="Vertical"
                        ItemSpacing="10" />
@@ -73,7 +63,8 @@
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
                             <StackLayout>
-                                <Label Text="costam"  FontSize="Medium"/>
+                                <Label Text="{Binding MealName}"  FontSize="Medium"/>
+                                <Label Text="{Binding MealType}"  FontSize="Medium"/>
                             </StackLayout>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
@@ -83,6 +74,15 @@
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
+
+
+                
+                
+
+
+            
+
+
 
                     
                     

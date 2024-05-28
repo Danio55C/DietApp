@@ -16,6 +16,7 @@ namespace DietApp.Models
         public int MealCarbs{ get; set; }
         public int MealProtein { get; set; }
         public int MealFats { get; set; }
-
+        public DateTime Date { get; set; }
     }
 }
+

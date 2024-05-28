@@ -46,13 +46,13 @@ namespace DietApp.Views
             
             recepie.Date = DateTime.UtcNow;
             if (!string.IsNullOrWhiteSpace(recepie.Text))
-            {
                 await App.Database.SaveNoteAsync(recepie);
-            }
-
             // Navigate backwards
             await Shell.Current.GoToAsync("..");
         }
+
+            
+            
 
         async void OnDeleteButtonClicked(object sender, EventArgs e)
         {

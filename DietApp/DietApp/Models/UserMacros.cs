@@ -8,8 +8,6 @@ namespace DietApp.Models
 {
     public class UserMacros
     {
-        
-
         [PrimaryKey, AutoIncrement]
         public int ID { get; set; }
         public int DailyCaloricLimit { get; set; }
@@ -21,22 +19,13 @@ namespace DietApp.Models
         public int DailyFatsLimit { get; set; }
         public int FatsConsumed { get; set; }
 
-
-        public UserMacros()
+        public  (int carbs, int fats, int protein, int calories)CalculateMacros(UserData userData)
         {
-            InitializeAsync();
-        }
-        private async Task<(int carbs, int fats, int protein, int calories)> CalculateMacros()
-        {
-            var userData = await App.Database.GetUserDataAsync();
+            //var userData = await App.Database.GetUserDataAsync();
 
             if (userData == null)
-            {
-                // Obsługa przypadku, gdy dane użytkownika nie zostały znalezione w bazie danych
                 return (0, 0, 0, 0);
-            }
-
-
+            
             switch (userData.UserGoal)
             {
                 //to do poprawy
@@ -66,10 +55,11 @@ namespace DietApp.Models
             }
         }
 
-        private async void InitializeAsync()
+        public async void  InitializeAsync()
         {
             // Wywołaj metodę CalculateMacros i przypisz wartości do właściwości
-            var macros = await CalculateMacros();
+            var userData = await App.Database.GetUserDataAsync();
+            var macros =  CalculateMacros(userData);
             DailyCaloricLimit = macros.calories;
             DailyCarbsLimit = macros.carbs;
             DailyProteinLimit = macros.protein;
@@ -82,9 +72,18 @@ namespace DietApp.Models
         {
             await App.Database.SaveUserMacrosAsync(this);
         }
-
-
-
     }
 }
+        
+
+
+        
+
+
+            
+
+
+
+
+
 

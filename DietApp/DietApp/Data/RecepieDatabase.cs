@@ -27,6 +27,11 @@ namespace DietApp.Data
             //Get all notes.
             return _database.Table<Recepie>().ToListAsync();
         }
+        public Task<List<Meal>> GetMealsAsync()
+        {
+            //Get all meals.
+            return _database.Table<Meal>().ToListAsync();
+        }
 
         public Task<Recepie> GetNoteAsync(int id)
         {
@@ -50,10 +55,28 @@ namespace DietApp.Data
                 return _database.InsertAsync(recepie);
             }
         }
+        public Task<int> SaveMealAsync(Meal meal)
+        {
+            if (meal.ID != 0)
+            {
+                // Update an existing note.
+                return _database.UpdateAsync(meal);
+            }
+            else
+            {
+                // Save a new note.
+                return _database.InsertAsync(meal);
+            }
+        }
         public Task<int> DeleteNoteAsync(Recepie recepie)
         {
             // Delete a note.
             return _database.DeleteAsync(recepie);
+        }
+        public Task<int> DeleteMealAsync(Meal meal)
+        {
+            // Delete a note.
+            return _database.DeleteAsync(meal);
         }
 
 
@@ -68,23 +91,7 @@ namespace DietApp.Data
         }
 
 
-        //public async Task<UserData> GetSettingAsync()
-        //{
-        //    return await _database.Table<UserData>().Where(x=>x.ID==1)
-        //}
-
-        //public Task<int> SaveUserMacrosAsync(UserMacros userMacros)
-        //{
-        //    if (userMacros.ID == 1)
-        //    {
-        //        return _database.InsertAsync(userMacros);
-        //    }
-        //    else
-        //    {
-        //        return _database.UpdateAsync(userMacros);
-
-        //    }
-        //}
+        
         public async Task SaveUserMacrosAsync(UserMacros userMacros)
         {
             try
