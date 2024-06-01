@@ -26,14 +26,12 @@ namespace DietApp.ViewModel
 
         public ICommand SavePhenotypeCommand { get; private set; }
        
-
+        //binding
         public PhenotypeAndGoalViewModel()
         {
             SavePhenotypeCommand = new Command(OnSave);
         }
             
-
-
         private async void OnSave(object obj)
         {
             try
@@ -98,6 +96,8 @@ namespace DietApp.ViewModel
 
     }
 }
+
+
 
 
 
