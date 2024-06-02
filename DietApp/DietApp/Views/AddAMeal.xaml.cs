@@ -18,9 +18,9 @@ namespace DietApp.Views
         public AddAMeal()
         {
                 InitializeComponent();
-            
                 BindingContext = new Meal();
         }
+            
         protected override async void OnAppearing()
         {
             base.OnAppearing();
@@ -39,7 +39,7 @@ namespace DietApp.Views
             {
                 await App.Database.SaveMealAsync(meal);
 
-                string result = await DisplayPromptAsync("Enter Quantity", $"Enter the quantity for {meal.MealName}:", "OK", "Cancel", null, -1);
+                string result = await DisplayPromptAsync("Did you consumed this meal?", $"Enter the serving size for {meal.MealName}:", "OK", "Cancel", null, 4);
                 if (int.TryParse(result, out int servingSize))
                 {
 
@@ -55,22 +55,11 @@ namespace DietApp.Views
             var selectedMeal = e.CurrentSelection.FirstOrDefault() as Meal;
             if (e.CurrentSelection != null)
             {
-                string result = await DisplayPromptAsync("Enter Quantity", $"Enter the quantity for {selectedMeal.MealName}:", "OK", "Cancel", null, -1);
+                string result = await DisplayPromptAsync("Did you consumed this meal?", $"Enter the serving size for {selectedMeal.MealName}:", "OK", "Cancel", null, 4);
                 if (int.TryParse(result, out int servingSize))
-                {
-
-                await CalculateConsumedCalories(selectedMeal, servingSize);
-                }
-
+                    await CalculateConsumedCalories(selectedMeal, servingSize);
             }  
         }
-
-
-
-
-
-
-
         private async Task CalculateConsumedCalories(Meal meal, int servingSize)
         {
             _userMacros.CaloriesConsumed += meal.MealCalories* servingSize/ _defoultMealServingSize;
@@ -93,6 +82,17 @@ namespace DietApp.Views
                 
     }
 }
+
+                
+
+                
+
+
+
+
+
+
+
            
            
           

@@ -52,7 +52,7 @@
                 <Button Grid.Row="6" Text="Add" Clicked="OnAddMealButtonClicked"></Button>
                 <Button Grid.Row="6" Text="Cancel" Grid.Column="1"></Button>
 
-                <Label Grid.Row="7" Grid.ColumnSpan="2" Text="recently used" FontSize="Medium" HorizontalOptions="CenterAndExpand" Margin="5"></Label>
+                <Label Grid.Row="7" Grid.ColumnSpan="2" Text="recent meals" FontSize="Medium" HorizontalOptions="CenterAndExpand" Margin="5"></Label>
 
                 <CollectionView x:Name="mealCollectionView" Grid.Row="8" Grid.ColumnSpan="2" SelectionMode="Single"
                     SelectionChanged="OnSelectionChanged"> 
