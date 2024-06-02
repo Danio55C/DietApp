@@ -52,20 +52,36 @@
                 <Button Grid.Row="6" Text="Add" Clicked="OnAddMealButtonClicked"></Button>
                 <Button Grid.Row="6" Text="Cancel" Grid.Column="1"></Button>
 
-                <Label Grid.Row="7" Grid.ColumnSpan="2" Text="recently used" FontSize="Medium" HorizontalOptions="CenterAndExpand"></Label>
+                <Label Grid.Row="7" Grid.ColumnSpan="2" Text="recently used" FontSize="Medium" HorizontalOptions="CenterAndExpand" Margin="5"></Label>
 
-                <CollectionView x:Name="mealCollectionView" Grid.Row="8" Grid.ColumnSpan="2"  >
+                <CollectionView x:Name="mealCollectionView" Grid.Row="8" Grid.ColumnSpan="2" SelectionMode="Single"
+                    SelectionChanged="OnSelectionChanged"> 
                     <CollectionView.ItemsLayout>
                         <LinearItemsLayout Orientation="Vertical"
-                       ItemSpacing="10" />
+                       ItemSpacing="20"/>
                     </CollectionView.ItemsLayout>
 
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
-                            <StackLayout>
-                                <Label Text="{Binding MealName}"  FontSize="Medium"/>
-                                <Label Text="{Binding MealType}"  FontSize="Medium"/>
-                            </StackLayout>
+                            <SwipeView>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition />
+                                        <ColumnDefinition />
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                    </Grid.RowDefinitions>
+                                <Label Text="{Binding MealName}"  FontSize="Medium"
+                                       Grid.ColumnSpan="2"   Grid.Row="0"            HorizontalOptions="CenterAndExpand" VerticalOptions="Center"/>
+                                    <Label Text="{Binding MealCalories,                                  StringFormat='calories: {0}'}"                                                  Grid.Row="1"                FontSize="Small"/>
+                                    <Label Text="{Binding MealCarbs,                                     StringFormat='carbs: {0}'}"  Grid.Column="1"  FontSize="Small" Grid.Row="1" />
+                                    <Label Text="{Binding MealProtein,                                  StringFormat='protein: {0}'}"                                       Grid.Row="2"                           FontSize="Small"/>
+                                    <Label Text="{Binding MealFats, StringFormat='fats: {0}'}"  FontSize="Small"  Grid.Column="1" Grid.Row="2" />
+                                </Grid>
+                            </SwipeView>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                     

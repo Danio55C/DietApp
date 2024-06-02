@@ -46,10 +46,9 @@ namespace DietApp.ViewModel
                     LifeStyleTDEE = LifeStyleTDEE,
                     ActivityIndex=ConvertActivityIndex(LifeStyleTDEE),
                     UserGoal=UserGoal
+                };
                     
 
-
-                };
                 await App.Database.SaveUserDataAsync(userData);
                 await Application.Current.MainPage.DisplayAlert("Sukces", "Twoje dane zostały zapisane", "OK");
                 await Application.Current.MainPage.DisplayAlert("Test", userData.TDEE.ToString(), "cancel");
@@ -66,9 +65,6 @@ namespace DietApp.ViewModel
             }
             
         }
-
-        
-
         public double ConvertActivityIndex(string LifeStyleTDEE)
         {
             switch (LifeStyleTDEE)
@@ -96,6 +92,10 @@ namespace DietApp.ViewModel
 
     }
 }
+
+
+        
+
 
 
 
