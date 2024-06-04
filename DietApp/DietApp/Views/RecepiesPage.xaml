@@ -22,7 +22,7 @@
         <CollectionView.ItemTemplate>
             <DataTemplate>
                 <StackLayout>
-                    <Label Text="{Binding Text}"
+                    <Label Text="{Binding RecepieName}" 
                            FontSize="Medium"/>
                     <Label Text="{Binding Date}"
                            TextColor="Silver"

@@ -91,7 +91,6 @@ namespace DietApp.Data
         }
 
 
-        
         public async Task SaveUserMacrosAsync(UserMacros userMacros)
         {
             try
@@ -107,13 +106,14 @@ namespace DietApp.Data
                     await _database.InsertAsync(userMacros);
                 }
 
-                Debug.WriteLine("User macros saved successfully.");
+                //Debug.WriteLine("User macros saved successfully.");
             }
             catch (Exception ex)
             {
                 Debug.WriteLine($"Error saving user macros: {ex.Message}");
             }
         }
+        
         public Task<int> SaveUserDataAsync(UserData userData)
         {
             if (userData.ID == 1)

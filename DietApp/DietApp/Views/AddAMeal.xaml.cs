@@ -41,10 +41,10 @@ namespace DietApp.Views
 
                 string result = await DisplayPromptAsync("Did you consumed this meal?", $"Enter the serving size for {meal.MealName}:", "OK", "Cancel", null, 4);
                 if (int.TryParse(result, out int servingSize))
-                {
-
                     await CalculateConsumedCalories(meal, servingSize);
-                }
+                
+
+                
 
             }
             

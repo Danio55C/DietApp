@@ -12,49 +12,49 @@ namespace DietApp.Views
     {
         public MainPage()
         {
-           
+
             BindingContext = new UserMacros();
             InitializeComponent();
         }
 
         protected override async void OnAppearing()
         {
-             
+
             try
             {
-               
+
                 var userData = await App.Database.GetUserDataAsync();
-            if (userData != null)
-            {
-                userDataListView.Text = userData.UserGoal;
-            }
+                if (userData != null)
+                {
+                    userDataListView.Text = userData.UserGoal;
+                }
 
-             await  LoadUserMacros();
+                await LoadUserMacros();
 
             }
-            catch (Exception ex )
+            catch (Exception ex)
             {
 
                 await Application.Current.MainPage.DisplayAlert("bŁąd", ex.ToString(), "OK");
             }
-                
+
         }
         async void OnChangeGoalButtonClicked(object sender, EventArgs e)
         {
-           
+
             await Shell.Current.GoToAsync(nameof(PhenotypeAndGoal));
         }
 
 
         async void OnAddaMealButtonClicked(object sender, EventArgs e)
         {
-            
-
-              
-            
-
             await Shell.Current.GoToAsync(nameof(AddAMeal));
         }
+
+
+
+
+
 
         private async Task LoadUserMacros()
         {
@@ -64,11 +64,19 @@ namespace DietApp.Views
 
                 if (userMacros != null)
                 {
-                    
-                        caloriesLabel.Text = $"Calories= {userMacros.CaloriesConsumed}/{userMacros.DailyCaloricLimit} kcal";
-                        carbsLabel.Text = $"Carbs= {userMacros.CarbsConsumed}/{userMacros.DailyCarbsLimit} grams";
-                        proteinLabel.Text = $"Protein= {userMacros.ProteinConsumed}/{userMacros.DailyProteinLimit} grams";
-                        fatsLabel.Text = $"Fats= {userMacros.FatsConsumed}/{userMacros.DailyFatsLimit} grams";
+
+                    caloriesLabel.Text = $"Calories= {userMacros.CaloriesConsumed}/{userMacros.DailyCaloricLimit} kcal";
+                    caloriesProgresBar.Progress = Math.Round(Math.Min((double)userMacros.CaloriesConsumed / userMacros.DailyCaloricLimit, 1), 2);
+
+                    carbsLabel.Text = $"Carbs= {userMacros.CarbsConsumed}/{userMacros.DailyCarbsLimit} grams";
+                    carbsProgresBar.Progress = Math.Round(Math.Min((double)userMacros.CarbsConsumed / userMacros.DailyCarbsLimit, 1), 2);
+
+                    proteinLabel.Text = $"Protein= {userMacros.ProteinConsumed}/{userMacros.DailyProteinLimit} grams";
+                    proteinProgresBar.Progress = Math.Round(Math.Min((double)userMacros.ProteinConsumed / userMacros.DailyProteinLimit, 1), 2);
+
+                    fatsLabel.Text = $"Fats= {userMacros.FatsConsumed}/{userMacros.DailyFatsLimit} grams";
+                    fatsProgresBar.Progress = Math.Round(Math.Min((double)userMacros.FatsConsumed / userMacros.DailyFatsLimit, 1), 2);
+
 
                 }
                 else
@@ -83,12 +91,14 @@ namespace DietApp.Views
         }
     }
 }
-                
-              
 
 
 
-               
-                
+
+
+
+
+
+
 
 

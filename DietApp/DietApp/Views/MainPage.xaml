@@ -66,16 +66,16 @@
                 </Grid.RowDefinitions>
 
                 <Label Grid.Row="1" FontSize="20" x:Name="caloriesLabel" Text="{Binding UserMacros.DailyCaloricLimit}" ></Label>
-                <ProgressBar  Grid.Row="2" ProgressColor="YellowGreen" Progress="0.1"></ProgressBar>
+                <ProgressBar  x:Name="caloriesProgresBar" Grid.Row="2" ProgressColor="YellowGreen" ></ProgressBar>
 
                 <Label Grid.Row="3" FontSize="20"  x:Name="carbsLabel" Text="{Binding UserMacros.DailyCarbsLimit}"></Label>
-                <ProgressBar  Grid.Row="4" ProgressColor="BurlyWood"  Progress="0.1"></ProgressBar>
+                <ProgressBar  Grid.Row="4"  x:Name="carbsProgresBar" ProgressColor="BurlyWood"  ></ProgressBar>
 
                 <Label  Grid.Row="5" FontSize="20" x:Name="proteinLabel" Text="{Binding UserMacros.DailyProteinLimit}"   ></Label>
-                <ProgressBar  Grid.Row="6" ProgressColor="WhiteSmoke"  Progress="0.1"></ProgressBar>
+                <ProgressBar  Grid.Row="6"  x:Name="proteinProgresBar" ProgressColor="WhiteSmoke" ></ProgressBar>
 
                 <Label FontSize="20" Grid.Row="7"  x:Name="fatsLabel"     ></Label>
-                <ProgressBar  Grid.Row="8" ProgressColor="Brown" Progress="0.1"></ProgressBar>
+                <ProgressBar  Grid.Row="8" ProgressColor="Brown"  x:Name="fatsProgresBar"></ProgressBar>
 
                 <Button  Grid.Row ="9" Text="Add a meal" x:Name="addAMealButton" Clicked="OnAddaMealButtonClicked"></Button>
 

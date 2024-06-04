@@ -4,17 +4,37 @@
              x:Class="DietApp.Views.AddEdditRecepie"
              Title="Recepie">
     <!-- Layout children vertically -->
-    <StackLayout Margin="20">
-        <Editor Placeholder="Enter your note"
-                Text="{Binding Text}"
-                HeightRequest="100" />
-        <!-- Layout children in two columns -->
-        <Grid ColumnDefinitions="*,*">
-            <Button Text="Save"
+    <StackLayout Margin="20" Spacing="10">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
+            <Entry Placeholder="Enter your recepie name"
+                Text="{Binding RecepieName}"
+        
+                 />
+            <Label Text="Preparating Method (Description)" Grid.Row="1"/>
+            <Editor HeightRequest="150" Grid.Row="2"/>
+
+            <Label Text="Ingredients" Grid.Row="3"/>
+            <!-- Layout children in two columns -->
+            <CollectionView  Grid.Row="5" >  </CollectionView>
+            <Button Text="Add Ingredient" Grid.Row="4"  Clicked="OnAddaIngredientButtonClicked">  </Button>
+            <Grid ColumnDefinitions="*,* " Grid.Row="6">
+                <Button Text="Save" 
                     Clicked="OnSaveButtonClicked" />
-            <Button Grid.Column="1"
+                <Button Grid.Column="1" 
                     Text="Delete"
                      Clicked="OnDeleteButtonClicked"/>
+            </Grid>
+
         </Grid>
+
     </StackLayout>
 </ContentPage>

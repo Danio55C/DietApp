@@ -45,14 +45,17 @@ namespace DietApp.Views
             var recepie = (Recepie)BindingContext;
             
             recepie.Date = DateTime.UtcNow;
-            if (!string.IsNullOrWhiteSpace(recepie.Text))
+            if (!string.IsNullOrWhiteSpace(recepie.RecepieName))
                 await App.Database.SaveNoteAsync(recepie);
             // Navigate backwards
             await Shell.Current.GoToAsync("..");
         }
 
-            
-            
+        async void OnAddaIngredientButtonClicked(object sender, EventArgs e)
+        {
+            await Shell.Current.GoToAsync(nameof(AddAMeal));
+        }
+
 
         async void OnDeleteButtonClicked(object sender, EventArgs e)
         {
