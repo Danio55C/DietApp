@@ -14,14 +14,15 @@ namespace DietApp.Data
         public RecepieDatabase(string dbPath)
         {
             _database = new SQLiteAsyncConnection(dbPath);
+            
             _database.CreateTableAsync<Recepie>().Wait();
             _database.CreateTableAsync<UserData>().Wait();
             _database.CreateTableAsync<UserMacros>().Wait();
             _database.CreateTableAsync<Meal>().Wait();
         }
 
-        
 
+        
         public Task<List<Recepie>> GetNotesAsync()
         {
             //Get all notes.
@@ -126,6 +127,12 @@ namespace DietApp.Data
                 
             }
         }
-        
+
+
+        public Task<List<Meal>> GetMealIngredientsAsync(int recipeId)
+        {
+            return _database.Table<Meal>().Where(i => i.ID == recipeId).ToListAsync();
+        }
+
     }
 }

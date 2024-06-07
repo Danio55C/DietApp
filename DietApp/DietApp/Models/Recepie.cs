@@ -11,7 +11,7 @@ namespace DietApp.Models
 
         public Recepie()
         {
-            //Ingredients = new Collection<RecepieIngredients>();
+            //Ingredients = new Collection<Meal>();
         }
 
         [PrimaryKey, AutoIncrement]
@@ -25,7 +25,10 @@ namespace DietApp.Models
         public int RecepieFats { get; set; }
         public DateTime Date { get; set; }
 
-       // public ICollection<RecepieIngredients> Ingredients { get; set; }
+        [Ignore]
+        public List<Meal> Ingredients { get; set; }
+        //public List<Meal> Ingedients { get; set; }
+
 
     }
 }

@@ -48,7 +48,7 @@ namespace DietApp.Views
 
         async void OnAddaMealButtonClicked(object sender, EventArgs e)
         {
-            await Shell.Current.GoToAsync(nameof(AddAMeal));
+            await Shell.Current.GoToAsync($"AddAMeal?source=AddAMeal");
         }
 
 
