@@ -4,27 +4,28 @@
              x:Class="DietApp.Views.AddEdditRecepie"
              Title="Recepie">
     <!-- Layout children vertically -->
-    <StackLayout Margin="20" Spacing="10">
+    <StackLayout Margin="10" Spacing="10">
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition />
-                <RowDefinition />
-                <RowDefinition />
-                <RowDefinition />
-                <RowDefinition />
-                <RowDefinition />
+                <RowDefinition Height="0.1*"/>
+                <RowDefinition Height="0.05*"/>
+                <RowDefinition Height="0.15*"/>
+                <RowDefinition Height="0.05*"/>
+                <RowDefinition Height="0.45*" />
+                <RowDefinition Height="0.1*"/>
+                <RowDefinition Height="0.1*"/>
             </Grid.RowDefinitions>
 
-            <Entry Placeholder="Enter your recepie name"
+            <Entry Placeholder="Enter your recepie name" Keyboard="Text"
                 Text="{Binding RecepieName}"
         
                  />
-            <Label Text="Preparating Method (Description)" Grid.Row="1"/>
-            <Editor HeightRequest="150" Grid.Row="2"/>
+            <Label Text="Preparating Method (Description)" Grid.Row="1" HeightRequest="5" />
+            <Editor Grid.Row="2" Keyboard="Text"/>
 
-            <Label Text="Ingredients" Grid.Row="3"/>
+            <Label Text="Ingredients" Grid.Row="3" />
             <!-- Layout children in two columns -->
-            <CollectionView  Grid.Row="5" x:Name="ingredientListCollectionView">
+            <CollectionView  Grid.Row="4" x:Name="ingredientListCollectionView" >
                 <CollectionView.ItemsLayout>
                     <LinearItemsLayout Orientation="Vertical"
                        ItemSpacing="10" />
@@ -32,7 +33,10 @@
                 <!-- Define the appearance of each item in the list -->
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        
+                        <StackLayout Padding="5">
+                            <Label Text="{Binding MealName}" FontSize="Medium"/>
+                            <Label Text="{Binding MealCalories}" FontSize="Small"/>
+                        </StackLayout>
 
 
 
@@ -40,7 +44,7 @@
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
-            <Button Text="Add Ingredient" Grid.Row="4"  Clicked="OnAddaIngredientButtonClicked">  </Button>
+            <Button Text="Add Ingredient" Grid.Row="5"  Clicked="OnAddaIngredientButtonClicked">  </Button>
             <Grid ColumnDefinitions="*,* " Grid.Row="6">
                 <Button Text="Save" 
                     Clicked="OnSaveButtonClicked" />

@@ -91,7 +91,11 @@ namespace DietApp.Data
             return _database.Table<UserMacros>().FirstOrDefaultAsync();
         }
 
-
+        public async Task<List<Meal>> GetIngredientsForRecipeAsync(int recipeId)
+        {
+            var recipe = await _database.Table<Recepie>().Where(r => r.ID == recipeId).FirstOrDefaultAsync();
+            return recipe?.Ingredients ?? new List<Meal>();
+        }
         public async Task SaveUserMacrosAsync(UserMacros userMacros)
         {
             try

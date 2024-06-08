@@ -35,6 +35,22 @@ namespace DietApp.Views
                 // Retrieve the note and set it as the BindingContext of the page.
                 Recepie recepie = await App.Database.GetNoteAsync(id);
                 BindingContext = recepie;
+
+
+
+                var ingredients = await App.Database.GetIngredientsForRecipeAsync(recepie.ID);
+                ingredientListCollectionView.ItemsSource = ingredients;
+
+
+                
+                //string test="";
+                //for (int i = 0; i < recepie.Ingredients.Count; i++)
+                //{
+
+                //    test = test + recepie.Ingredients[i].MealName + ", ";
+                //}
+                
+                //await DisplayAlert("Sukses z AddAIgredient", "składniki: " + test, "cancel");
             }
             catch (Exception)
             {

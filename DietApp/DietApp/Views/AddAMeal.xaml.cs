@@ -42,6 +42,7 @@ namespace DietApp.Views
         {
             InitializeComponent();
              _recipeId = recepieId;
+            BindingContext = new Meal();
 
         }
         protected override async void OnAppearing()
@@ -58,26 +59,57 @@ namespace DietApp.Views
 
         async void OnAddMealButtonClicked(object sender, EventArgs e)
         {
-            if (_source == "AddAMeal")
+            try
             {
 
-                var meal = (Meal)BindingContext;
+            
+            var meal = (Meal)BindingContext;
+                if (meal == null)
+                {
+                    await DisplayAlert("Error", "Meal is null", "OK");
+                    return;
+                }
 
                 meal.Date = DateTime.UtcNow;
                 if (!string.IsNullOrWhiteSpace(meal.MealName))
-                {
                     await App.Database.SaveMealAsync(meal);
+                
+                
+            if (_source == "AddAMeal")
+            {
+
 
                     string result = await DisplayPromptAsync("Did you consumed this meal?", $"Enter the serving size for {meal.MealName}:", "OK", "Cancel", null, 4);
                     if (int.TryParse(result, out int servingSize))
                         await CalculateConsumedCalories(meal, servingSize);
-                }
             }
             else
             {
-                await DisplayAlert("AddAIgredient", "z AddAIgredient", "cancel");
+                    var recepie = await App.Database.GetNoteAsync(_recipeId);
+
+                    recepie.Ingredients.Add(meal);
+                    await App.Database.SaveNoteAsync(recepie);
+                    await Shell.Current.GoToAsync("..");
+                //await DisplayAlert("Sukses z AddAIgredient", recepie.In, "cancel");
+
+                // Navigate backwards
+            }
+            }
+            catch (Exception ex)
+            {
+
+                await DisplayAlert("bład", ex.ToString(), "cancel");
             }
         }
+
+                
+
+                
+
+
+                
+               
+
 
 
         async void OnSelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -101,10 +133,10 @@ namespace DietApp.Views
                     var selectedMeal = e.CurrentSelection.FirstOrDefault() as Meal;
                     var recepie = await App.Database.GetNoteAsync(_recipeId);
                      recepie.Ingredients.Add(selectedMeal);
-
+                    
                     await App.Database.SaveNoteAsync(recepie);
 
-                    //await DisplayAlert("Sukses z AddAIgredient", recepie.Ingredients.Count<Meal>, "cancel");
+                    //await DisplayAlert("Sukses z AddAIgredient", recepie.In, "cancel");
 
                     // Navigate backwards
                     await Shell.Current.GoToAsync("..");
