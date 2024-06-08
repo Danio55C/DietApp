@@ -24,7 +24,22 @@
 
             <Label Text="Ingredients" Grid.Row="3"/>
             <!-- Layout children in two columns -->
-            <CollectionView  Grid.Row="5" >  </CollectionView>
+            <CollectionView  Grid.Row="5" x:Name="ingredientListCollectionView">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical"
+                       ItemSpacing="10" />
+                </CollectionView.ItemsLayout>
+                <!-- Define the appearance of each item in the list -->
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        
+
+
+
+
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
             <Button Text="Add Ingredient" Grid.Row="4"  Clicked="OnAddaIngredientButtonClicked">  </Button>
             <Grid ColumnDefinitions="*,* " Grid.Row="6">
                 <Button Text="Save" 

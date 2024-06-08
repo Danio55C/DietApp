@@ -15,33 +15,45 @@ namespace DietApp.Views
     public partial class AddAMeal : ContentPage
     {
         UserMacros _userMacros;
-        int _defoultMealServingSize=100;
+        int _defoultMealServingSize = 100;
+
+        private int _recipeId;
+
 
         private string _source;
+
         public string Source
         {
             get => _source;
             set
             {
                 _source = value;
-                
+
             }
         }
 
         public AddAMeal()
         {
-                InitializeComponent();
-                BindingContext = new Meal();
+            InitializeComponent();
+            BindingContext = new Meal();
         }
-                
-        
+
+        public AddAMeal(int recepieId)
+        {
+            InitializeComponent();
+             _recipeId = recepieId;
+
+        }
         protected override async void OnAppearing()
         {
             base.OnAppearing();
 
             mealCollectionView.ItemsSource = await App.Database.GetMealsAsync();
             _userMacros = await App.Database.GetUserMacrosAsync();
+
         }
+
+
 
 
         async void OnAddMealButtonClicked(object sender, EventArgs e)
@@ -49,48 +61,67 @@ namespace DietApp.Views
             if (_source == "AddAMeal")
             {
 
-            var meal = (Meal)BindingContext;
+                var meal = (Meal)BindingContext;
 
-            meal.Date = DateTime.UtcNow;
-            if (!string.IsNullOrWhiteSpace(meal.MealName))
-            {
-                await App.Database.SaveMealAsync(meal);
+                meal.Date = DateTime.UtcNow;
+                if (!string.IsNullOrWhiteSpace(meal.MealName))
+                {
+                    await App.Database.SaveMealAsync(meal);
 
-                string result = await DisplayPromptAsync("Did you consumed this meal?", $"Enter the serving size for {meal.MealName}:", "OK", "Cancel", null, 4);
-                if (int.TryParse(result, out int servingSize))
-                    await CalculateConsumedCalories(meal, servingSize);
-            }
+                    string result = await DisplayPromptAsync("Did you consumed this meal?", $"Enter the serving size for {meal.MealName}:", "OK", "Cancel", null, 4);
+                    if (int.TryParse(result, out int servingSize))
+                        await CalculateConsumedCalories(meal, servingSize);
+                }
             }
             else
             {
                 await DisplayAlert("AddAIgredient", "z AddAIgredient", "cancel");
             }
         }
-            
-                
+
+
         async void OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (_source == "AddAMeal")
             {
 
-            var selectedMeal = e.CurrentSelection.FirstOrDefault() as Meal;
-            if (e.CurrentSelection != null)
-            {
-                string result = await DisplayPromptAsync("Did you consumed this meal?", $"Enter the serving size for {selectedMeal.MealName}:", "OK", "Cancel", null, 4);
-                if (int.TryParse(result, out int servingSize))
-                    await CalculateConsumedCalories(selectedMeal, servingSize);
-            }  
+                var selectedMeal = e.CurrentSelection.FirstOrDefault() as Meal;
+                if (e.CurrentSelection != null)
+                {
+                    string result = await DisplayPromptAsync("Did you consumed this meal?", $"Enter the serving size for {selectedMeal.MealName}:", "OK", "Cancel", null, 4);
+                    if (int.TryParse(result, out int servingSize))
+                        await CalculateConsumedCalories(selectedMeal, servingSize);
+                }
             }
             else
             {
-                await DisplayAlert("AddAIgredient", "z AddAIgredient", "cancel");
+                try
+                {
+                    await DisplayAlert("id", _recipeId.ToString(), "cancel");
+                    var selectedMeal = e.CurrentSelection.FirstOrDefault() as Meal;
+                    var recepie = await App.Database.GetNoteAsync(_recipeId);
+                     recepie.Ingredients.Add(selectedMeal);
+
+                    await App.Database.SaveNoteAsync(recepie);
+
+                    //await DisplayAlert("Sukses z AddAIgredient", recepie.Ingredients.Count<Meal>, "cancel");
+
+                    // Navigate backwards
+                    await Shell.Current.GoToAsync("..");
+                }
+                catch (Exception ex)
+                {
+
+                    await DisplayAlert("bład", ex.ToString(), "cancel");
+                }
             }
         }
-        
-        
+
+
+
         private async Task CalculateConsumedCalories(Meal meal, int servingSize)
         {
-            _userMacros.CaloriesConsumed += meal.MealCalories* servingSize/ _defoultMealServingSize;
+            _userMacros.CaloriesConsumed += meal.MealCalories * servingSize / _defoultMealServingSize;
             _userMacros.CarbsConsumed += meal.MealCarbs * servingSize / _defoultMealServingSize;
             _userMacros.ProteinConsumed += meal.MealProtein * servingSize / _defoultMealServingSize;
             _userMacros.FatsConsumed += meal.MealFats * servingSize / _defoultMealServingSize;
@@ -100,32 +131,15 @@ namespace DietApp.Views
 
             await Shell.Current.GoToAsync("..");
         }
-                
+
         async void OnSwipeDeleteClicked(object sender, EventArgs e)
         {
             var meal = (Meal)BindingContext;
             await App.Database.DeleteMealAsync(meal);
         }
 
-                
-
-
-           
-                
     }
 }
-            
-            
-            
-
-               
-
-       
-
-
-                
-
-                
 
 
 
@@ -133,10 +147,26 @@ namespace DietApp.Views
 
 
 
-           
-           
-          
-            
 
-            
-            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -9,8 +9,10 @@ namespace DietApp.Views
     [QueryProperty(nameof(ItemId), nameof(ItemId))]
     public partial class AddEdditRecepie : ContentPage
     {
+        
         public string ItemId
         {
+            
             set
             {
                 LoadNote(value);
@@ -24,7 +26,7 @@ namespace DietApp.Views
             // Set the BindingContext of the page to a new Note.
             BindingContext = new Recepie();
         }
-
+        
         async void LoadNote(string itemId)
         {
             try
@@ -53,7 +55,17 @@ namespace DietApp.Views
 
         async void OnAddaIngredientButtonClicked(object sender, EventArgs e)
         {
-            await Shell.Current.GoToAsync($"AddAMeal?source=AddAIgredient");
+            try
+            {
+                var recepie = (Recepie)BindingContext;
+                var addIngredientPage = new AddAMeal(Convert.ToInt32(recepie.ID));
+                await Navigation.PushAsync(addIngredientPage);
+            }
+            catch (Exception ex)
+            {
+
+                await DisplayAlert("bład", ex.ToString(), "cancel");
+            }
         }
 
 
