@@ -41,7 +41,7 @@ namespace DietApp.Views
         public AddAMeal(int recepieId)
         {
             InitializeComponent();
-             _recipeId = recepieId;
+            _recipeId = recepieId;
             BindingContext = new Meal();
 
         }
@@ -62,8 +62,7 @@ namespace DietApp.Views
             try
             {
 
-            
-            var meal = (Meal)BindingContext;
+                var meal = (Meal)BindingContext;
                 if (meal == null)
                 {
                     await DisplayAlert("Error", "Meal is null", "OK");
@@ -73,27 +72,46 @@ namespace DietApp.Views
                 meal.Date = DateTime.UtcNow;
                 if (!string.IsNullOrWhiteSpace(meal.MealName))
                     await App.Database.SaveMealAsync(meal);
-                
-                
-            if (_source == "AddAMeal")
-            {
+
+
+
+                if (_source == "AddAMeal")
+                {
 
 
                     string result = await DisplayPromptAsync("Did you consumed this meal?", $"Enter the serving size for {meal.MealName}:", "OK", "Cancel", null, 4);
                     if (int.TryParse(result, out int servingSize))
                         await CalculateConsumedCalories(meal, servingSize);
-            }
-            else
-            {
+                }
+                else
+                {
+
+                    var mealIngredient = new RecepieIngredients
+                    {
+                        MealName = meal.MealName,
+                        MealCalories = meal.MealCalories,
+                        MealCarbs = meal.MealCarbs,
+                        MealProtein = meal.MealProtein,
+                        MealFats = meal.MealFats,
+                        RecepieId = _recipeId
+                    };
+
                     var recepie = await App.Database.GetNoteAsync(_recipeId);
 
-                    recepie.Ingredients.Add(meal);
-                    await App.Database.SaveNoteAsync(recepie);
-                    await Shell.Current.GoToAsync("..");
-                //await DisplayAlert("Sukses z AddAIgredient", recepie.In, "cancel");
 
-                // Navigate backwards
-            }
+                    string result = await DisplayPromptAsync("Quantiy", $"Enter the serving size for {mealIngredient.MealName}:", "OK", "Cancel", null, 4);
+                    if (int.TryParse(result, out int servingSize))
+                        mealIngredient.QuantityInGrams = servingSize;
+
+                    recepie.Ingredients.Add(mealIngredient);
+                    await App.Database.SaveNoteAsync(recepie);
+                    await App.Database.SaveRecepieIngredientAsync(mealIngredient);
+
+                    await Shell.Current.GoToAsync("..");
+                    //await DisplayAlert("Sukses z AddAIgredient", recepie.In, "cancel");
+
+                    // Navigate backwards
+                }
             }
             catch (Exception ex)
             {
@@ -101,15 +119,6 @@ namespace DietApp.Views
                 await DisplayAlert("bład", ex.ToString(), "cancel");
             }
         }
-
-                
-
-                
-
-
-                
-               
-
 
 
         async void OnSelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -130,16 +139,42 @@ namespace DietApp.Views
                 try
                 {
                     await DisplayAlert("id", _recipeId.ToString(), "cancel");
-                    var selectedMeal = e.CurrentSelection.FirstOrDefault() as Meal;
-                    var recepie = await App.Database.GetNoteAsync(_recipeId);
-                     recepie.Ingredients.Add(selectedMeal);
-                    
-                    await App.Database.SaveNoteAsync(recepie);
 
-                    //await DisplayAlert("Sukses z AddAIgredient", recepie.In, "cancel");
 
-                    // Navigate backwards
-                    await Shell.Current.GoToAsync("..");
+
+                    var selectedIngredient = e.CurrentSelection.FirstOrDefault() as Meal;
+                    if (selectedIngredient != null)
+                    {
+                        // Tworzenie nowego obiektu RecepieIngredients na podstawie selectedIngredient
+                        var mealIngredient = new RecepieIngredients
+                        {
+                            MealName = selectedIngredient.MealName,
+                            MealCalories = selectedIngredient.MealCalories,
+                            MealCarbs = selectedIngredient.MealCarbs,
+                            MealProtein = selectedIngredient.MealProtein,
+                            MealFats = selectedIngredient.MealFats,
+                            RecepieId = _recipeId
+                        };
+
+
+                        var recepie = await App.Database.GetNoteAsync(_recipeId);
+
+                        string result = await DisplayPromptAsync("Quantiy", $"Enter the serving size for {mealIngredient.MealName}:", "OK", "Cancel", null, 4);
+                        if (int.TryParse(result, out int servingSize))
+                        {
+                            mealIngredient.QuantityInGrams = servingSize;
+
+
+
+                            recepie.Ingredients.Add(mealIngredient);
+                            await App.Database.SaveRecepieIngredientAsync(mealIngredient);
+                            await App.Database.SaveNoteAsync(recepie);
+                        }
+                        //await DisplayAlert("Sukses z AddAIgredient", recepie.In, "cancel");
+
+                        // Navigate backwards
+                        await Shell.Current.GoToAsync("..");
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -172,6 +207,17 @@ namespace DietApp.Views
 
     }
 }
+
+
+
+
+
+
+
+
+
+
+
 
 
 

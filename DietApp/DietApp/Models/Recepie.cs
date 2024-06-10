@@ -9,7 +9,7 @@ namespace DietApp.Models
     {
         public Recepie()
         {
-            Ingredients = new List<Meal>();
+            Ingredients = new List<RecepieIngredients>();
         }
 
         [PrimaryKey, AutoIncrement]
@@ -26,11 +26,11 @@ namespace DietApp.Models
         public string IngredientsSerialized
         {
             get => JsonConvert.SerializeObject(Ingredients);
-            set => Ingredients = JsonConvert.DeserializeObject<List<Meal>>(value);
+            set => Ingredients = JsonConvert.DeserializeObject<List<RecepieIngredients>>(value);
         }
 
         [Ignore]
-        public List<Meal> Ingredients { get; set; }
+        public List<RecepieIngredients> Ingredients { get; set; }
     }
 }
 

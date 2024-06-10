@@ -93,5 +93,8 @@ namespace DietApp.Views
             // Navigate backwards
             await Shell.Current.GoToAsync("..");
         }
+
+
+
     }
 }

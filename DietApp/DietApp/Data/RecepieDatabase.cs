@@ -19,6 +19,8 @@ namespace DietApp.Data
             _database.CreateTableAsync<UserData>().Wait();
             _database.CreateTableAsync<UserMacros>().Wait();
             _database.CreateTableAsync<Meal>().Wait();
+            _database.CreateTableAsync<RecepieIngredients>().Wait();
+            
         }
 
 
@@ -69,6 +71,19 @@ namespace DietApp.Data
                 return _database.InsertAsync(meal);
             }
         }
+        public Task<int> SaveRecepieIngredientAsync(RecepieIngredients ingredient)
+        {
+            if (ingredient.ID != 0)
+            {
+                // Update an existing note.
+                return _database.UpdateAsync(ingredient);
+            }
+            else
+            {
+                // Save a new note.
+                return _database.InsertAsync(ingredient);
+            }
+        }
         public Task<int> DeleteNoteAsync(Recepie recepie)
         {
             // Delete a note.
@@ -91,10 +106,10 @@ namespace DietApp.Data
             return _database.Table<UserMacros>().FirstOrDefaultAsync();
         }
 
-        public async Task<List<Meal>> GetIngredientsForRecipeAsync(int recipeId)
+        public async Task<List<RecepieIngredients>> GetIngredientsForRecipeAsync(int recipeId)
         {
             var recipe = await _database.Table<Recepie>().Where(r => r.ID == recipeId).FirstOrDefaultAsync();
-            return recipe?.Ingredients ?? new List<Meal>();
+            return recipe?.Ingredients ?? new List<RecepieIngredients>();
         }
         public async Task SaveUserMacrosAsync(UserMacros userMacros)
         {
@@ -133,9 +148,9 @@ namespace DietApp.Data
         }
 
 
-        public Task<List<Meal>> GetMealIngredientsAsync(int recipeId)
+        public Task<List<RecepieIngredients>> GetMealIngredientsAsync(int recipeId)
         {
-            return _database.Table<Meal>().Where(i => i.ID == recipeId).ToListAsync();
+            return _database.Table<RecepieIngredients>().Where(i => i.ID == recipeId).ToListAsync();
         }
 
     }
