@@ -21,13 +21,25 @@
         <!-- Define the appearance of each item in the list -->
         <CollectionView.ItemTemplate>
             <DataTemplate>
+                <Frame  BackgroundColor="WhiteSmoke">
                 <StackLayout>
-                    <Label Text="{Binding RecepieName}" 
+                    <Grid ColumnDefinitions="*,*,*,*" RowDefinitions="*,*,*">
+
+
+
+                        <Label Grid.Column="0" Grid.ColumnSpan="4" Text="{Binding RecepieName} " 
                            FontSize="Medium"/>
-                    <Label Text="{Binding Date}"
-                           TextColor="Silver"
-                           FontSize="Small" />
+
+                        <Label Grid.Row="1" Grid.Column="0" FontSize="Small" Text="{Binding RecepieCalories, StringFormat='calories: {0}'}"></Label>
+                        <Label Grid.Row="1"  Grid.Column="1" FontSize="Small"  Text="{Binding RecepieCarbs, StringFormat='carbs: {0}'}"></Label>
+                        <Label Grid.Row="1"  Grid.Column="2" FontSize="Small"  Text="{Binding RecepieProtein, StringFormat='protein: {0}'}"></Label>
+                        <Label Grid.Row="1"  Grid.Column="3" FontSize="Small"  Text="{Binding RecepieFats, StringFormat='fats: {0}'}"></Label>
+
+                        <Label Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="4"    Text="{Binding Date}" TextColor="Silver" FontSize="Caption" />
+
+                    </Grid>
                 </StackLayout>
+                </Frame>
             </DataTemplate>
         </CollectionView.ItemTemplate>
     </CollectionView>

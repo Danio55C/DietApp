@@ -11,10 +11,10 @@
                 <RowDefinition Height="0.05*"/>
                 <RowDefinition Height="0.15*"/>
                 <RowDefinition Height="0.05*"/>
-                <RowDefinition Height="0.45*" />
+                <RowDefinition Height="0.4*" />
                 <RowDefinition Height="0.1*" />
-                <RowDefinition Height="0.05*"/>
-                <RowDefinition Height="0.05*"/>
+                <RowDefinition Height="0.1*"/>
+                <RowDefinition Height="0.1*"/>
                 
             </Grid.RowDefinitions>
 
@@ -25,7 +25,7 @@
             <Label Text="Preparating Method (Description)" Grid.Row="1" HeightRequest="5" />
             <Editor Grid.Row="2" Keyboard="Text" Text="{Binding PreparatingMethod}"/>
 
-            <Label Text="Ingredients" Grid.Row="3" />
+            <Label Text="Ingredients:" Grid.Row="3" />
             <!-- Layout children in two columns -->
             <CollectionView  Grid.Row="4" x:Name="ingredientListCollectionView" >
                 <CollectionView.ItemsLayout>
@@ -51,15 +51,15 @@
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
-            <Grid ColumnDefinitions="*,*,*,*" Grid.Row="5">
+            <Grid ColumnDefinitions="*,*,*,*" ColumnSpacing="10" Grid.Row="5">
                 <Label Grid.Column="0" Text="{Binding RecepieCalories, StringFormat='total calories: {0}'}"></Label>
-                <Label Grid.Column="1"></Label>
-                <Label Grid.Column="2"></Label>
-                <Label Grid.Column="3"></Label>
-                
-                
+                <Label Grid.Column="1" Text="{Binding RecepieCarbs, StringFormat='total carbs: {0}'}"></Label>
+                <Label Grid.Column="2" Text="{Binding RecepieProtein, StringFormat='total protein: {0}'}"></Label>
+                <Label Grid.Column="3" Text="{Binding RecepieFats, StringFormat='total fats: {0}'}"></Label>
                 
             </Grid>
+                
+                
                   
             <Button Text="Add Ingredient" Grid.Row="6"  Clicked="OnAddaIngredientButtonClicked">  </Button>
             <Grid ColumnDefinitions="*,* " Grid.Row="7">

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using DietApp;
 using DietApp.Models;
@@ -9,7 +10,7 @@ namespace DietApp.Views
     [QueryProperty(nameof(ItemId), nameof(ItemId))]
     public partial class AddEdditRecepie : ContentPage
     {
-        
+        int _defoultMealServingSize = 100;
         public string ItemId
         {
             
@@ -40,16 +41,16 @@ namespace DietApp.Views
 
                 var ingredients = await App.Database.GetIngredientsForRecipeAsync(recepie.ID);
                 ingredientListCollectionView.ItemsSource = ingredients;
+                CalculateRecepieMacros(recepie, ingredients);
 
 
-                
                 //string test="";
                 //for (int i = 0; i < recepie.Ingredients.Count; i++)
                 //{
 
                 //    test = test + recepie.Ingredients[i].MealName + ", ";
                 //}
-                
+
                 //await DisplayAlert("Sukses z AddAIgredient", "składniki: " + test, "cancel");
             }
             catch (Exception)
@@ -83,7 +84,18 @@ namespace DietApp.Views
                 await DisplayAlert("bład", ex.ToString(), "cancel");
             }
         }
-
+       async void CalculateRecepieMacros(Recepie recepie, List<RecepieIngredients> ingredients)
+        {
+            
+            foreach (var item in ingredients)
+            {
+                recepie.RecepieCalories += item.MealCalories * item.QuantityInGrams / _defoultMealServingSize;
+                recepie.RecepieCarbs += item.MealCarbs * item.QuantityInGrams / _defoultMealServingSize;
+                recepie.RecepieProtein += item.MealProtein * item.QuantityInGrams / _defoultMealServingSize;
+                recepie.RecepieFats += item.MealFats * item.QuantityInGrams / _defoultMealServingSize;
+            }
+            await App.Database.SaveNoteAsync(recepie);
+        }
 
         async void OnDeleteButtonClicked(object sender, EventArgs e)
         {
