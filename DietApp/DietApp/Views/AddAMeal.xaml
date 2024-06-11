@@ -3,6 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="DietApp.Views.AddAMeal"
              Title="Add a Meal">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Get Meal from Recepies"
+             Clicked="OnGoToRecepiesClicked" />
+    </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout Margin="5"
                             Spacing="5">

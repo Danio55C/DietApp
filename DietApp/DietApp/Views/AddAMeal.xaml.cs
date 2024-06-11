@@ -183,7 +183,10 @@ namespace DietApp.Views
                 }
             }
         }
-
+        async void OnGoToRecepiesClicked(object sender, EventArgs e)
+        {
+            await Shell.Current.GoToAsync("//RecepiePage");
+        }
 
 
         private async Task CalculateConsumedCalories(Meal meal, int servingSize)

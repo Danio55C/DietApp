@@ -111,8 +111,17 @@ namespace DietApp.Views
 
         async void OnConsumeThisRecepieClicked(object sender, EventArgs e)
         {
-            // Navigate to the NoteEntryPage, without passing any data.
-            await Shell.Current.GoToAsync("..");
+            var recepie = (Recepie)BindingContext;
+            var result =  await DisplayAlert("Did you ate this dish?", $"Total macros that will be added: Calories:{recepie.RecepieCalories}, Carbs: {recepie.RecepieCarbs}, Protein: {recepie.RecepieProtein}, Fats: {recepie.RecepieFats}", "OK", "Cancel");
+
+            if (result==true)
+            {
+               await CalculateConsumedCalories(recepie);
+            }
+
+            await Shell.Current.GoToAsync("//HomePage");
+
+
         }
 
         private async Task CalculateConsumedCalories(Recepie recepie)

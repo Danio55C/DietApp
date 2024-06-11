@@ -7,9 +7,11 @@
     <TabBar>
         <ShellContent Title="Main Page"
                       Icon="icon_feed.png"
-                      ContentTemplate="{DataTemplate views:MainPage}" />
+                      ContentTemplate="{DataTemplate views:MainPage}" 
+                      Route="HomePage"/>
         <ShellContent Title="Recepies"
                       Icon="icon_about.png"
-                      ContentTemplate="{DataTemplate views:RecepiesPage}" />
+                      ContentTemplate="{DataTemplate views:RecepiesPage}"
+                       Route="RecepiePage"/>
     </TabBar>
 </Shell>
