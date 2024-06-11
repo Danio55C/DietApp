@@ -3,19 +3,23 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="DietApp.Views.AddEdditRecepie"
              Title="Recepie">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Consume this recepie"
+                 Clicked="OnConsumeThisRecepieClicked" />
+    </ContentPage.ToolbarItems>
     <!-- Layout children vertically -->
     <StackLayout Margin="10" Spacing="10">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="0.1*"/>
                 <RowDefinition Height="0.05*"/>
-                <RowDefinition Height="0.15*"/>
-                <RowDefinition Height="0.05*"/>
+                <RowDefinition Height="0.14*"/>
+                <RowDefinition Height="0.06*"/>
                 <RowDefinition Height="0.4*" />
                 <RowDefinition Height="0.1*" />
                 <RowDefinition Height="0.1*"/>
-                <RowDefinition Height="0.1*"/>
                 
+
             </Grid.RowDefinitions>
 
             <Entry Placeholder="Enter your recepie name" Keyboard="Text"
@@ -24,10 +28,12 @@
                  />
             <Label Text="Preparating Method (Description)" Grid.Row="1" HeightRequest="5" />
             <Editor Grid.Row="2" Keyboard="Text" Text="{Binding PreparatingMethod}"/>
-
-            <Label Text="Ingredients:" Grid.Row="3" />
+            <Grid Grid.Row="3" ColumnDefinitions="*,2*">
+                <Label Text="Ingredients:"  FontSize="Medium"/>
+                <Button Grid.Column="1" Text="Add Ingredient"  Clicked="OnAddaIngredientButtonClicked"></Button>
+            </Grid>
             <!-- Layout children in two columns -->
-            <CollectionView  Grid.Row="4" x:Name="ingredientListCollectionView" >
+            <CollectionView  VerticalScrollBarVisibility="Always" Grid.Row="4" x:Name="ingredientListCollectionView"  >
                 <CollectionView.ItemsLayout>
                     <GridItemsLayout Orientation="Vertical" Span="3" HorizontalItemSpacing="5" VerticalItemSpacing="10"/>
                 </CollectionView.ItemsLayout>
@@ -35,7 +41,7 @@
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <Frame  BackgroundColor="WhiteSmoke">
-                        <StackLayout Padding="5">
+                            <StackLayout  Padding="5">
                                 <Label Text="{Binding MealName}"  FontSize="Small"/>
 
                                 <Label Text="{Binding QuantityInGrams, StringFormat='amount: {0}'}"  FontSize="Caption"/>
@@ -44,25 +50,19 @@
                                 <Label Text="{Binding MealCarbs, StringFormat='carbs: {0}'}" FontSize="Caption"/>
                                 <Label Text="{Binding MealProtein,  StringFormat='protein: {0}'}" FontSize="Caption"/>
                                 <Label Text="{Binding MealFats, StringFormat='fats: {0}'}" FontSize="Caption"/>
-                        </StackLayout>
-
+                            </StackLayout>
                         </Frame>
-
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
-            <Grid ColumnDefinitions="*,*,*,*" ColumnSpacing="10" Grid.Row="5">
-                <Label Grid.Column="0" Text="{Binding RecepieCalories, StringFormat='total calories: {0}'}"></Label>
-                <Label Grid.Column="1" Text="{Binding RecepieCarbs, StringFormat='total carbs: {0}'}"></Label>
-                <Label Grid.Column="2" Text="{Binding RecepieProtein, StringFormat='total protein: {0}'}"></Label>
-                <Label Grid.Column="3" Text="{Binding RecepieFats, StringFormat='total fats: {0}'}"></Label>
-                
+             
+            <Grid  Grid.Row="5" RowDefinitions="*,*" ColumnDefinitions="*,*" ColumnSpacing="10" >
+                <Label  BackgroundColor="Cornsilk" Text="{Binding RecepieCalories, StringFormat='total calories: {0}'}" FontSize="Medium"></Label>
+                <Label BackgroundColor="Cornsilk" Grid.Column="1" Text="{Binding RecepieCarbs, StringFormat='total carbs: {0}'}" FontSize="Medium"></Label>
+                <Label BackgroundColor="Cornsilk" Grid.Row="1"  Text="{Binding RecepieProtein, StringFormat='total protein: {0}'}" FontSize="Medium"></Label>
+                <Label BackgroundColor="Cornsilk" Grid.Row="1" Grid.Column="1" Text="{Binding RecepieFats, StringFormat='total fats: {0}'}" FontSize="Medium"></Label>
             </Grid>
-                
-                
-                  
-            <Button Text="Add Ingredient" Grid.Row="6"  Clicked="OnAddaIngredientButtonClicked">  </Button>
-            <Grid ColumnDefinitions="*,* " Grid.Row="7">
+            <Grid ColumnDefinitions="*,* " Grid.Row="6">
                 <Button Text="Save Recepie" 
                     Clicked="OnSaveButtonClicked" />
                 <Button Grid.Column="1" 
@@ -74,4 +74,11 @@
 
     </StackLayout>
 </ContentPage>
+               
+            
+
+
+
+
+
 

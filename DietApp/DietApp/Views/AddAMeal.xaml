@@ -54,7 +54,7 @@
 
                 <Label Grid.Row="7" Grid.ColumnSpan="2" Text="recent meals" FontSize="Medium" HorizontalOptions="CenterAndExpand" Margin="5"></Label>
 
-                <CollectionView x:Name="mealCollectionView" Grid.Row="8" Grid.ColumnSpan="2" SelectionMode="Single"
+                <CollectionView HorizontalScrollBarVisibility="Always" x:Name="mealCollectionView" Grid.Row="8" Grid.ColumnSpan="2" SelectionMode="Single"
                     SelectionChanged="OnSelectionChanged"> 
                     <CollectionView.ItemsLayout>
                         <LinearItemsLayout Orientation="Vertical"

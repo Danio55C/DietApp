@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.IO;
+using System.Threading.Tasks;
 using DietApp;
 using DietApp.Models;
 using Xamarin.Forms;
@@ -11,9 +13,10 @@ namespace DietApp.Views
     public partial class AddEdditRecepie : ContentPage
     {
         int _defoultMealServingSize = 100;
+        UserMacros _userMacros;
         public string ItemId
         {
-            
+
             set
             {
                 LoadNote(value);
@@ -27,7 +30,7 @@ namespace DietApp.Views
             // Set the BindingContext of the page to a new Note.
             BindingContext = new Recepie();
         }
-        
+
         async void LoadNote(string itemId)
         {
             try
@@ -62,7 +65,7 @@ namespace DietApp.Views
         async void OnSaveButtonClicked(object sender, EventArgs e)
         {
             var recepie = (Recepie)BindingContext;
-            
+
             recepie.Date = DateTime.UtcNow;
             if (!string.IsNullOrWhiteSpace(recepie.RecepieName))
                 await App.Database.SaveNoteAsync(recepie);
@@ -84,9 +87,18 @@ namespace DietApp.Views
                 await DisplayAlert("bład", ex.ToString(), "cancel");
             }
         }
-       async void CalculateRecepieMacros(Recepie recepie, List<RecepieIngredients> ingredients)
+        async private void OnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            
+            var recepie = (Recepie)BindingContext;
+            var ingredients = await App.Database.GetIngredientsForRecipeAsync(recepie.ID);
+           CalculateRecepieMacros(recepie, ingredients);
+        }
+        async void CalculateRecepieMacros(Recepie recepie, List<RecepieIngredients> ingredients)
+        {
+            recepie.RecepieCalories = 0;
+            recepie.RecepieCarbs = 0;
+            recepie.RecepieProtein = 0;
+            recepie.RecepieFats = 0;
             foreach (var item in ingredients)
             {
                 recepie.RecepieCalories += item.MealCalories * item.QuantityInGrams / _defoultMealServingSize;
@@ -97,14 +109,36 @@ namespace DietApp.Views
             await App.Database.SaveNoteAsync(recepie);
         }
 
+        async void OnConsumeThisRecepieClicked(object sender, EventArgs e)
+        {
+            // Navigate to the NoteEntryPage, without passing any data.
+            await Shell.Current.GoToAsync("..");
+        }
+
+        private async Task CalculateConsumedCalories(Recepie recepie)
+        {
+            _userMacros = await App.Database.GetUserMacrosAsync();
+            _userMacros.CaloriesConsumed += recepie.RecepieCalories;
+            _userMacros.CarbsConsumed += recepie.RecepieCarbs;
+            _userMacros.ProteinConsumed += recepie.RecepieProtein;
+            _userMacros.FatsConsumed += recepie.RecepieFats;
+
+            await _userMacros.SaveMacrosAsync();
+            await DisplayAlert("Updated Macros", $"Calories: {_userMacros.CaloriesConsumed}, Carbs: {_userMacros.CarbsConsumed}, Protein: {_userMacros.ProteinConsumed}, Fats: {_userMacros.FatsConsumed}", "OK", "Cancel");
+
+            
+        }
+
         async void OnDeleteButtonClicked(object sender, EventArgs e)
         {
             var recepie = (Recepie)BindingContext;
+
             await App.Database.DeleteNoteAsync(recepie);
 
             // Navigate backwards
             await Shell.Current.GoToAsync("..");
         }
+
 
 
 

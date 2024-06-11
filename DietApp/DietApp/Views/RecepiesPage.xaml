@@ -13,7 +13,8 @@
     <CollectionView x:Name="collectionView"
                     Margin="20"
                     SelectionMode="Single"
-                    SelectionChanged="OnSelectionChanged">
+                    SelectionChanged="OnSelectionChanged"
+                    HorizontalScrollBarVisibility="Always">
         <CollectionView.ItemsLayout>
             <LinearItemsLayout Orientation="Vertical"
                                ItemSpacing="10" />
@@ -24,9 +25,6 @@
                 <Frame  BackgroundColor="WhiteSmoke">
                 <StackLayout>
                     <Grid ColumnDefinitions="*,*,*,*" RowDefinitions="*,*,*">
-
-
-
                         <Label Grid.Column="0" Grid.ColumnSpan="4" Text="{Binding RecepieName} " 
                            FontSize="Medium"/>
 
@@ -44,3 +42,5 @@
         </CollectionView.ItemTemplate>
     </CollectionView>
 </ContentPage>
+
+
