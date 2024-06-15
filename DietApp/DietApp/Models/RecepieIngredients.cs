@@ -9,7 +9,7 @@ namespace DietApp.Models
     {
         public int RecepieId { get; set;}
         public int QuantityInGrams { get; set;}
-
-       
     }
 }
+
+       

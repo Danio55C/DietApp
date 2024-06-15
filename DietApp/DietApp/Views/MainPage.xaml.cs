@@ -19,7 +19,7 @@ namespace DietApp.Views
 
         protected override async void OnAppearing()
         {
-
+            
             try
             {
 

@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using DietApp;
 using DietApp.Data;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace DietApp
@@ -18,11 +20,12 @@ namespace DietApp
                 if (_database == null)
                 {
                     _database = new RecepieDatabase(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Notes.db3"));
+                    
                 }
                 return _database;
             }
         }
-
+        
         public App()
         {
             InitializeComponent();
@@ -31,6 +34,9 @@ namespace DietApp
 
         protected override void OnStart()
         {
+            var databasePath = Path.Combine(FileSystem.AppDataDirectory, "Notes.db3");
+
+            Console.WriteLine(databasePath);
         }
 
         protected override void OnSleep()

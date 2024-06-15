@@ -134,10 +134,7 @@ namespace DietApp.Views
 
             await _userMacros.SaveMacrosAsync();
             await DisplayAlert("Updated Macros", $"Calories: {_userMacros.CaloriesConsumed}, Carbs: {_userMacros.CarbsConsumed}, Protein: {_userMacros.ProteinConsumed}, Fats: {_userMacros.FatsConsumed}", "OK", "Cancel");
-
-            
         }
-
         async void OnDeleteButtonClicked(object sender, EventArgs e)
         {
             var recepie = (Recepie)BindingContext;
@@ -147,9 +144,11 @@ namespace DietApp.Views
             // Navigate backwards
             await Shell.Current.GoToAsync("..");
         }
-
-
-
-
     }
 }
+
+
+
+
+
+            
