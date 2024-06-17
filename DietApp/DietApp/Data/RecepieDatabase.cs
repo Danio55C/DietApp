@@ -9,22 +9,22 @@ namespace DietApp.Data
 {
     public class RecepieDatabase
     {
-       private readonly SQLiteAsyncConnection _database;
+        private readonly SQLiteAsyncConnection _database;
 
         public RecepieDatabase(string dbPath)
         {
             _database = new SQLiteAsyncConnection(dbPath);
-            
+
             _database.CreateTableAsync<Recepie>().Wait();
             _database.CreateTableAsync<UserData>().Wait();
             _database.CreateTableAsync<UserMacros>().Wait();
             _database.CreateTableAsync<Meal>().Wait();
             _database.CreateTableAsync<RecepieIngredients>().Wait();
-            
+
         }
 
 
-        
+
         public Task<List<Recepie>> GetNotesAsync()
         {
             //Get all notes.
@@ -43,7 +43,7 @@ namespace DietApp.Data
                             .Where(i => i.ID == id)
                             .FirstOrDefaultAsync();
         }
-        
+
 
         public Task<int> SaveNoteAsync(Recepie recepie)
         {
@@ -133,7 +133,7 @@ namespace DietApp.Data
                 Debug.WriteLine($"Error saving user macros: {ex.Message}");
             }
         }
-        
+
         public Task<int> SaveUserDataAsync(UserData userData)
         {
             if (userData.ID == 1)
@@ -143,7 +143,7 @@ namespace DietApp.Data
             else
             {
                 return _database.UpdateAsync(userData);
-                
+
             }
         }
 

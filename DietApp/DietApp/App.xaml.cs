@@ -34,9 +34,7 @@ namespace DietApp
 
         protected override void OnStart()
         {
-            var databasePath = Path.Combine(FileSystem.AppDataDirectory, "Notes.db3");
-
-            Console.WriteLine(databasePath);
+            
         }
 
         protected override void OnSleep()

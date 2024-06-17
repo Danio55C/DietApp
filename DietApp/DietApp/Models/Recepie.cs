@@ -14,7 +14,9 @@ namespace DietApp.Models
 
         [PrimaryKey, AutoIncrement]
         public int ID { get; set; }
+        [NotNull]
         public string RecepieName { get; set; }
+
         public string PreparatingMethod { get; set; }
         public int RecepieCalories { get; set; }
         public int RecepieCarbs { get; set; }

@@ -25,10 +25,7 @@ namespace DietApp.Views
             InitializeComponent();
             genderPicker.ItemsSource = GenderList;
 
-            tDEpicker.ItemsSource = Enum.GetValues(typeof(LifeStyleTDE))
-                            .Cast<LifeStyleTDE>()
-                            .Select(value => EnumHelper.GetDescription(value))
-                            .ToList();
+            tDEpicker.ItemsSource = Lifestyle;
             goalPicker.ItemsSource = GoalList;
 
             BindingContext = new PhenotypeAndGoalViewModel();
@@ -48,6 +45,15 @@ namespace DietApp.Views
         List<string> GoalList = new List<string>
         {
             "lose weight","gain weight","maintain weight"
+        };
+
+        List<string> Lifestyle = new List<string>
+        {
+            "Nieaktywny/siedzący: prawie brak aktywności w ciągu dnia",
+            "Lekki: 1-3 treningów w tygodniu, lub praca z lekką aktywnością",
+            "Średni: 3-5 treningów w tygodniu",
+            "Wysoki: 6-7 treningów w tygodniu",
+            "Bardzo Wysoki: Ciężka praca fizyczna lub treningi dwa razy w tygodniu"
         };
 
 

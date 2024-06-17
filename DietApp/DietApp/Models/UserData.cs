@@ -10,12 +10,23 @@ namespace DietApp.Models
     {
         [PrimaryKey, AutoIncrement]
         public int ID { get; set; }
+        
+        [NotNull]
         public int CurrentWeight { get; set; }
+        [NotNull]
         public int Height { get; set; }
+        
+        [NotNull]
         public int Age { get; set; }
+        [MaxLength(10)]
+        [NotNull]
         public string Gender { get; set; }
+        [MaxLength(200)]
+        [NotNull]
         public string LifeStyleTDEE { get; set; }
         public double ActivityIndex { get; set; }
+        [MaxLength(50)]
+        [NotNull]
         public string UserGoal { get; set; }
         public int TDEE => CalcuteTDEE();
 
