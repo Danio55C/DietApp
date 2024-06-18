@@ -18,12 +18,12 @@
 
         <Image Source="xamarin_logo.png"
                BackgroundColor="{OnPlatform iOS=LightSlateGray, Android=#2196F3}"
-               
                HeightRequest="64"
-               
                Grid.Row="0"
-               Grid.ColumnSpan="2"
-              />
+               Grid.ColumnSpan="2"/>
+              
+               
+               
         <Label FontSize="22"  Grid.Row="1"  >
             <Label.FormattedText>
                 <FormattedString>

@@ -14,6 +14,9 @@ namespace DietApp.Views
     {
         int _defoultMealServingSize = 100;
         UserMacros _userMacros;
+
+
+
         public string ItemId
         {
 
@@ -91,7 +94,7 @@ namespace DietApp.Views
         {
             var Recipe = (Recipe)BindingContext;
             var ingredients = await App.Database.GetIngredientsForRecipeAsync(Recipe.ID);
-           CalculateRecipeMacros(Recipe, ingredients);
+            CalculateRecipeMacros(Recipe, ingredients);
         }
         async void CalculateRecipeMacros(Recipe Recipe, List<RecipeIngredients> ingredients)
         {
@@ -99,12 +102,14 @@ namespace DietApp.Views
             Recipe.RecipeCarbs = 0;
             Recipe.RecipeProtein = 0;
             Recipe.RecipeFats = 0;
+            
             foreach (var item in ingredients)
             {
                 Recipe.RecipeCalories += item.MealCalories * item.QuantityInGrams / _defoultMealServingSize;
                 Recipe.RecipeCarbs += item.MealCarbs * item.QuantityInGrams / _defoultMealServingSize;
                 Recipe.RecipeProtein += item.MealProtein * item.QuantityInGrams / _defoultMealServingSize;
                 Recipe.RecipeFats += item.MealFats * item.QuantityInGrams / _defoultMealServingSize;
+                
             }
             await App.Database.SaveNoteAsync(Recipe);
         }
@@ -112,11 +117,11 @@ namespace DietApp.Views
         async void OnConsumeThisRecipeClicked(object sender, EventArgs e)
         {
             var Recipe = (Recipe)BindingContext;
-            var result =  await DisplayAlert("Did you ate this dish?", $"Total macros that will be added: Calories:{Recipe.RecipeCalories}, Carbs: {Recipe.RecipeCarbs}, Protein: {Recipe.RecipeProtein}, Fats: {Recipe.RecipeFats}", "OK", "Cancel");
+            var result = await DisplayAlert("Did you ate this dish?", $"Total macros that will be added: Calories:{Recipe.RecipeCalories}, Carbs: {Recipe.RecipeCarbs}, Protein: {Recipe.RecipeProtein}, Fats: {Recipe.RecipeFats}", "OK", "Cancel");
 
-            if (result==true)
+            if (result == true)
             {
-               await CalculateConsumedCalories(Recipe);
+                await CalculateConsumedCalories(Recipe);
             }
 
             await Shell.Current.GoToAsync("//HomePage");
@@ -144,6 +149,59 @@ namespace DietApp.Views
             // Navigate backwards
             await Shell.Current.GoToAsync("..");
         }
+
+        async void OnGenerateShoppingListButtonClicked(object sender, EventArgs e)
+        {
+            var recipe = (Recipe)BindingContext;
+            var ingredients = await App.Database.GetIngredientsForRecipeAsync(recipe.ID);
+            recipe.RecipePrice = 0;
+            
+
+
+            var stackLayout = new StackLayout
+            {
+                Padding = new Thickness(20)
+            };
+
+            stackLayout.Children.Add(new Label
+            {
+                Text = "Your Shopping List: \n",
+                FontSize = 20,
+                FontAttributes = FontAttributes.Bold
+            });
+
+            foreach (var item in ingredients)
+            {
+                recipe.RecipePrice = +item.MealPrice;
+                
+                stackLayout.Children.Add(new Label { Text = $"{item.MealName}", FontSize = 20, });
+                stackLayout.Children.Add(new Label { Text = $"quantity: {item.QuantityInGrams} grams", FontSize = 10, });
+                stackLayout.Children.Add(new Label { Text = $"cost: {item.MealPrice} zł \n", FontSize = 10, });
+            }
+
+            stackLayout.Children.Add(new Button
+            {
+                Text = "Zamknij",
+                Command = new Command(async () => await Navigation.PopModalAsync())
+            });
+            var scrollView = new ScrollView
+            {
+                Content = stackLayout
+            };
+            stackLayout.Children.Add(new Label
+            {
+                Text =$"Total Dish cost: {recipe.RecipePrice.ToString()} zł",
+                FontSize = 30,
+
+            });
+            var modalPage = new ContentPage
+            {
+                Title = "Lista zakupów",
+                Content = scrollView
+            };
+            await Navigation.PushModalAsync(modalPage);
+        }
+
     }
 }
 
@@ -151,4 +209,22 @@ namespace DietApp.Views
 
 
 
-            
+
+//var modalPage = new ContentPage
+//{
+//    Title = "Lista zakupów",
+//    Content = new StackLayout
+//    {
+//        Padding = new Thickness(20),
+//        Children =
+//                {
+
+//                new Label { Text = "Your shopping list:", FontSize = 20, FontAttributes = FontAttributes.Bold },
+//                 // Wyświetl listę zakupów
+             
+//                new Label { Text =jointString},
+//                new Label { Text = $"Total Dish cost= {recipe.RecipePrice}" }, // Wyświetl listę zakupów
+//                new Button { Text = "Zamknij", Command = new Command(async () => await Navigation.PopModalAsync()) } // Przycisk zamknięcia modala
+//            }
+//    }
+//};

@@ -52,6 +52,7 @@ namespace DietApp.Views
             mealCollectionView.ItemsSource = await App.Database.GetMealsAsync();
             _userMacros = await App.Database.GetUserMacrosAsync();
 
+
         }
 
 
@@ -93,6 +94,7 @@ namespace DietApp.Views
                         MealCarbs = meal.MealCarbs,
                         MealProtein = meal.MealProtein,
                         MealFats = meal.MealFats,
+                        MealPrice= meal.MealPrice,
                         RecipeId = _recipeId
                     };
 
@@ -153,6 +155,7 @@ namespace DietApp.Views
                             MealCarbs = selectedIngredient.MealCarbs,
                             MealProtein = selectedIngredient.MealProtein,
                             MealFats = selectedIngredient.MealFats,
+                            MealPrice = selectedIngredient.MealPrice,
                             RecipeId = _recipeId
                         };
 

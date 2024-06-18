@@ -26,6 +26,7 @@ namespace DietApp.Models
         public int MealProtein { get; set; }
         [NotNull]
         public int MealFats { get; set; }
+        public double MealPrice { get; set; }
         public DateTime Date { get; set; }
     }
 }

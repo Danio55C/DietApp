@@ -22,6 +22,7 @@ namespace DietApp.Models
         public int RecipeCarbs { get; set; }
         public int RecipeProtein { get; set; }
         public int RecipeFats { get; set; }
+        public double RecipePrice { get; set; }
         public DateTime Date { get; set; }
 
         // Serialize list to JSON for storage in SQLite

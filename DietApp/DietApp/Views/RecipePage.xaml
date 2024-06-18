@@ -23,20 +23,20 @@
         <CollectionView.ItemTemplate>
             <DataTemplate>
                 <Frame  BackgroundColor="WhiteSmoke">
-                <StackLayout>
-                    <Grid ColumnDefinitions="*,*,*,*" RowDefinitions="*,*,*">
-                        <Label Grid.Column="0" Grid.ColumnSpan="4" Text="{Binding RecepieName} " 
+                    <StackLayout>
+                        <Grid ColumnDefinitions="*,*,*,*" RowDefinitions="*,*,*">
+                            <Label Grid.Column="0" Grid.ColumnSpan="4" Text="{Binding RecipeName} " 
                            FontSize="Medium"/>
 
-                        <Label Grid.Row="1" Grid.Column="0" FontSize="Small" Text="{Binding RecepieCalories, StringFormat='calories: {0}'}"></Label>
-                        <Label Grid.Row="1"  Grid.Column="1" FontSize="Small"  Text="{Binding RecepieCarbs, StringFormat='carbs: {0}'}"></Label>
-                        <Label Grid.Row="1"  Grid.Column="2" FontSize="Small"  Text="{Binding RecepieProtein, StringFormat='protein: {0}'}"></Label>
-                        <Label Grid.Row="1"  Grid.Column="3" FontSize="Small"  Text="{Binding RecepieFats, StringFormat='fats: {0}'}"></Label>
+                            <Label Grid.Row="1" Grid.Column="0" FontSize="Small" Text="{Binding RecipeCalories, StringFormat='calories: {0}'}"></Label>
+                            <Label Grid.Row="1"  Grid.Column="1" FontSize="Small"  Text="{Binding RecipeCarbs, StringFormat='carbs: {0}'}"></Label>
+                            <Label Grid.Row="1"  Grid.Column="2" FontSize="Small"  Text="{Binding RecipeProtein, StringFormat='protein: {0}'}"></Label>
+                            <Label Grid.Row="1"  Grid.Column="3" FontSize="Small"  Text="{Binding RecipeFats, StringFormat='fats: {0}'}"></Label>
 
-                        <Label Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="4"    Text="{Binding Date}" TextColor="Silver" FontSize="Caption" />
+                            <Label Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="4"    Text="{Binding Date}" TextColor="Silver" FontSize="Caption" />
 
-                    </Grid>
-                </StackLayout>
+                        </Grid>
+                    </StackLayout>
                 </Frame>
             </DataTemplate>
         </CollectionView.ItemTemplate>
