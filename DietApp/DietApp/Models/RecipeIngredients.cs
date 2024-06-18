@@ -6,10 +6,10 @@ using SQLite;
 
 namespace DietApp.Models
 {
-   public class RecepieIngredients :Meal
+   public class RecipeIngredients :Meal
     {
         
-        public int RecepieId { get; set;}
+        public int RecipeId { get; set;}
         public int QuantityInGrams { get; set;}
         
     }

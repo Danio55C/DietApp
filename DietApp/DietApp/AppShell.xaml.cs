@@ -9,7 +9,7 @@ namespace DietApp
         public AppShell()
         {
             InitializeComponent();
-            Routing.RegisterRoute(nameof(AddEdditRecepie), typeof(AddEdditRecepie));
+            Routing.RegisterRoute(nameof(AddEdditRecipe), typeof(AddEdditRecipe));
             Routing.RegisterRoute(nameof(PhenotypeAndGoal), typeof(PhenotypeAndGoal));
             Routing.RegisterRoute(nameof(AddAMeal), typeof(AddAMeal));
         }

@@ -9,9 +9,9 @@ using Xamarin.Forms;
 
 namespace DietApp.Views
 {
-    public partial class RecepiesPage : ContentPage
+    public partial class RecipePage : ContentPage
     {
-        public RecepiesPage()
+        public RecipePage()
         {
             InitializeComponent();
         }
@@ -28,7 +28,7 @@ namespace DietApp.Views
         async void OnAddClicked(object sender, EventArgs e)
         {
             // Navigate to the NoteEntryPage, without passing any data.
-            await Shell.Current.GoToAsync(nameof(AddEdditRecepie));
+            await Shell.Current.GoToAsync(nameof(AddEdditRecipe));
         }
 
         async void OnSelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -36,8 +36,8 @@ namespace DietApp.Views
             if (e.CurrentSelection != null)
             {
                 // Navigate to the NoteEntryPage, passing the ID as a query parameter.
-                Recepie recepie = (Recepie)e.CurrentSelection.FirstOrDefault();
-                await Shell.Current.GoToAsync($"{nameof(AddEdditRecepie)}?{nameof(AddEdditRecepie.ItemId)}={recepie.ID.ToString()}");
+                Recipe Recipe = (Recipe)e.CurrentSelection.FirstOrDefault();
+                await Shell.Current.GoToAsync($"{nameof(AddEdditRecipe)}?{nameof(AddEdditRecipe.ItemId)}={Recipe.ID.ToString()}");
             }
         }
     }

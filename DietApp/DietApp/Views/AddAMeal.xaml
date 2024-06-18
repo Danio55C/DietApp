@@ -4,8 +4,8 @@
              x:Class="DietApp.Views.AddAMeal"
              Title="Add a Meal">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Get Meal from Recepies"
-             Clicked="OnGoToRecepiesClicked" />
+        <ToolbarItem Text="Get Meal from Recipies"
+             Clicked="OnGoToRecipesClicked" />
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout Margin="5"

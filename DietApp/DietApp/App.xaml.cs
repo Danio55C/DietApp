@@ -10,16 +10,16 @@ namespace DietApp
 {
     public partial class App : Application
     {
-        static RecepieDatabase _database;
+        static RecipieDatabase _database;
 
         // Create the database connection as a singleton.
-        public static RecepieDatabase Database
+        public static RecipieDatabase Database
         {
             get
             {
                 if (_database == null)
                 {
-                    _database = new RecepieDatabase(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Notes.db3"));
+                    _database = new RecipieDatabase(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "DietAppDataBase.db3"));
                     
                 }
                 return _database;

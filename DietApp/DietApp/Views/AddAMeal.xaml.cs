@@ -38,10 +38,10 @@ namespace DietApp.Views
             BindingContext = new Meal();
         }
 
-        public AddAMeal(int recepieId)
+        public AddAMeal(int RecipeId)
         {
             InitializeComponent();
-            _recipeId = recepieId;
+            _recipeId = RecipeId;
             BindingContext = new Meal();
 
         }
@@ -86,29 +86,29 @@ namespace DietApp.Views
                 else
                 {
 
-                    var mealIngredient = new RecepieIngredients
+                    var mealIngredient = new RecipeIngredients
                     {
                         MealName = meal.MealName,
                         MealCalories = meal.MealCalories,
                         MealCarbs = meal.MealCarbs,
                         MealProtein = meal.MealProtein,
                         MealFats = meal.MealFats,
-                        RecepieId = _recipeId
+                        RecipeId = _recipeId
                     };
 
-                    var recepie = await App.Database.GetNoteAsync(_recipeId);
+                    var Recipe = await App.Database.GetNoteAsync(_recipeId);
 
 
                     string result = await DisplayPromptAsync("Quantiy", $"Enter the serving size for {mealIngredient.MealName}:", "OK", "Cancel", null, 4);
                     if (int.TryParse(result, out int servingSize))
                         mealIngredient.QuantityInGrams = servingSize;
 
-                    recepie.Ingredients.Add(mealIngredient);
-                    await App.Database.SaveNoteAsync(recepie);
-                    await App.Database.SaveRecepieIngredientAsync(mealIngredient);
+                    Recipe.Ingredients.Add(mealIngredient);
+                    await App.Database.SaveNoteAsync(Recipe);
+                    await App.Database.SaveRecipeIngredientAsync(mealIngredient);
 
                     await Shell.Current.GoToAsync("..");
-                    //await DisplayAlert("Sukses z AddAIgredient", recepie.In, "cancel");
+                    //await DisplayAlert("Sukses z AddAIgredient", Recipe.In, "cancel");
 
                     // Navigate backwards
                 }
@@ -145,19 +145,19 @@ namespace DietApp.Views
                     var selectedIngredient = e.CurrentSelection.FirstOrDefault() as Meal;
                     if (selectedIngredient != null)
                     {
-                        // Tworzenie nowego obiektu RecepieIngredients na podstawie selectedIngredient
-                        var mealIngredient = new RecepieIngredients
+                        // Tworzenie nowego obiektu RecipeIngredients na podstawie selectedIngredient
+                        var mealIngredient = new RecipeIngredients
                         {
                             MealName = selectedIngredient.MealName,
                             MealCalories = selectedIngredient.MealCalories,
                             MealCarbs = selectedIngredient.MealCarbs,
                             MealProtein = selectedIngredient.MealProtein,
                             MealFats = selectedIngredient.MealFats,
-                            RecepieId = _recipeId
+                            RecipeId = _recipeId
                         };
 
 
-                        var recepie = await App.Database.GetNoteAsync(_recipeId);
+                        var Recipe = await App.Database.GetNoteAsync(_recipeId);
 
                         string result = await DisplayPromptAsync("Quantiy", $"Enter the serving size for {mealIngredient.MealName}:", "OK", "Cancel", null, 4);
                         if (int.TryParse(result, out int servingSize))
@@ -166,11 +166,11 @@ namespace DietApp.Views
 
 
 
-                            recepie.Ingredients.Add(mealIngredient);
-                            await App.Database.SaveRecepieIngredientAsync(mealIngredient);
-                            await App.Database.SaveNoteAsync(recepie);
+                            Recipe.Ingredients.Add(mealIngredient);
+                            await App.Database.SaveRecipeIngredientAsync(mealIngredient);
+                            await App.Database.SaveNoteAsync(Recipe);
                         }
-                        //await DisplayAlert("Sukses z AddAIgredient", recepie.In, "cancel");
+                        //await DisplayAlert("Sukses z AddAIgredient", Recipe.In, "cancel");
 
                         // Navigate backwards
                         await Shell.Current.GoToAsync("..");
@@ -183,9 +183,10 @@ namespace DietApp.Views
                 }
             }
         }
-        async void OnGoToRecepiesClicked(object sender, EventArgs e)
+
+        async void OnGoToRecipesClicked(object sender, EventArgs e)
         {
-            await Shell.Current.GoToAsync("//RecepiePage");
+            await Shell.Current.GoToAsync("//RecipePage");
         }
 
 

@@ -7,28 +7,28 @@ using System;
 
 namespace DietApp.Data
 {
-    public class RecepieDatabase
+    public class RecipieDatabase
     {
         private readonly SQLiteAsyncConnection _database;
 
-        public RecepieDatabase(string dbPath)
+        public RecipieDatabase(string dbPath)
         {
             _database = new SQLiteAsyncConnection(dbPath);
 
-            _database.CreateTableAsync<Recepie>().Wait();
+            _database.CreateTableAsync<Recipe>().Wait();
             _database.CreateTableAsync<UserData>().Wait();
             _database.CreateTableAsync<UserMacros>().Wait();
             _database.CreateTableAsync<Meal>().Wait();
-            _database.CreateTableAsync<RecepieIngredients>().Wait();
+            _database.CreateTableAsync<RecipeIngredients>().Wait();
 
         }
 
 
 
-        public Task<List<Recepie>> GetNotesAsync()
+        public Task<List<Recipe>> GetNotesAsync()
         {
             //Get all notes.
-            return _database.Table<Recepie>().ToListAsync();
+            return _database.Table<Recipe>().ToListAsync();
         }
         public Task<List<Meal>> GetMealsAsync()
         {
@@ -36,26 +36,26 @@ namespace DietApp.Data
             return _database.Table<Meal>().ToListAsync();
         }
 
-        public Task<Recepie> GetNoteAsync(int id)
+        public Task<Recipe> GetNoteAsync(int id)
         {
             // Get a specific note.
-            return _database.Table<Recepie>()
+            return _database.Table<Recipe>()
                             .Where(i => i.ID == id)
                             .FirstOrDefaultAsync();
         }
 
 
-        public Task<int> SaveNoteAsync(Recepie recepie)
+        public Task<int> SaveNoteAsync(Recipe Recipe)
         {
-            if (recepie.ID != 0)
+            if (Recipe.ID != 0)
             {
                 // Update an existing note.
-                return _database.UpdateAsync(recepie);
+                return _database.UpdateAsync(Recipe);
             }
             else
             {
                 // Save a new note.
-                return _database.InsertAsync(recepie);
+                return _database.InsertAsync(Recipe);
             }
         }
         public Task<int> SaveMealAsync(Meal meal)
@@ -71,7 +71,7 @@ namespace DietApp.Data
                 return _database.InsertAsync(meal);
             }
         }
-        public Task<int> SaveRecepieIngredientAsync(RecepieIngredients ingredient)
+        public Task<int> SaveRecipeIngredientAsync(RecipeIngredients ingredient)
         {
             if (ingredient.ID != 0)
             {
@@ -84,10 +84,10 @@ namespace DietApp.Data
                 return _database.InsertAsync(ingredient);
             }
         }
-        public Task<int> DeleteNoteAsync(Recepie recepie)
+        public Task<int> DeleteNoteAsync(Recipe Recipe)
         {
             // Delete a note.
-            return _database.DeleteAsync(recepie);
+            return _database.DeleteAsync(Recipe);
         }
         public Task<int> DeleteMealAsync(Meal meal)
         {
@@ -106,10 +106,10 @@ namespace DietApp.Data
             return _database.Table<UserMacros>().FirstOrDefaultAsync();
         }
 
-        public async Task<List<RecepieIngredients>> GetIngredientsForRecipeAsync(int recipeId)
+        public async Task<List<RecipeIngredients>> GetIngredientsForRecipeAsync(int recipeId)
         {
-            var recipe = await _database.Table<Recepie>().Where(r => r.ID == recipeId).FirstOrDefaultAsync();
-            return recipe?.Ingredients ?? new List<RecepieIngredients>();
+            var recipe = await _database.Table<Recipe>().Where(r => r.ID == recipeId).FirstOrDefaultAsync();
+            return recipe?.Ingredients ?? new List<RecipeIngredients>();
         }
         public async Task SaveUserMacrosAsync(UserMacros userMacros)
         {
@@ -136,7 +136,7 @@ namespace DietApp.Data
 
         public Task<int> SaveUserDataAsync(UserData userData)
         {
-            if (userData.ID == 1)
+            if (userData.ID == 0)
             {
                 return _database.InsertAsync(userData);
             }
@@ -148,9 +148,9 @@ namespace DietApp.Data
         }
 
 
-        public Task<List<RecepieIngredients>> GetMealIngredientsAsync(int recipeId)
+        public Task<List<RecipeIngredients>> GetMealIngredientsAsync(int recipeId)
         {
-            return _database.Table<RecepieIngredients>().Where(i => i.ID == recipeId).ToListAsync();
+            return _database.Table<RecipeIngredients>().Where(i => i.ID == recipeId).ToListAsync();
         }
 
     }

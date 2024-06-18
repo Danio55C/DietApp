@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="DietApp.Views.AddEdditRecepie"
-             Title="Recepie">
+             x:Class="DietApp.Views.AddEdditRecipe"
+             Title="Recipe">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Consume this recepie"
-                 Clicked="OnConsumeThisRecepieClicked" />
+        <ToolbarItem Text="Consume this recipe"
+                 Clicked="OnConsumeThisRecipeClicked" />
     </ContentPage.ToolbarItems>
     <!-- Layout children vertically -->
     <StackLayout Margin="10" Spacing="10">
@@ -23,7 +23,7 @@
             </Grid.RowDefinitions>
 
             <Entry Placeholder="Enter your recepie name" Keyboard="Text"
-                Text="{Binding RecepieName}"
+                Text="{Binding RecipeName}"
         
                  />
             <Label Text="Preparating Method (Description)" Grid.Row="1" HeightRequest="5" />
@@ -57,16 +57,16 @@
             </CollectionView>
              
             <Grid  Grid.Row="5" RowDefinitions="*,*" ColumnDefinitions="*,*" ColumnSpacing="10" >
-                <Label  BackgroundColor="Cornsilk" Text="{Binding RecepieCalories, StringFormat='total calories: {0}'}" FontSize="Medium"></Label>
-                <Label BackgroundColor="Cornsilk" Grid.Column="1" Text="{Binding RecepieCarbs, StringFormat='total carbs: {0}'}" FontSize="Medium"></Label>
-                <Label BackgroundColor="Cornsilk" Grid.Row="1"  Text="{Binding RecepieProtein, StringFormat='total protein: {0}'}" FontSize="Medium"></Label>
-                <Label BackgroundColor="Cornsilk" Grid.Row="1" Grid.Column="1" Text="{Binding RecepieFats, StringFormat='total fats: {0}'}" FontSize="Medium"></Label>
+                <Label  BackgroundColor="Cornsilk" Text="{Binding  RecipeCalories, StringFormat='total calories: {0}'}" FontSize="Medium"></Label>
+                <Label BackgroundColor="Cornsilk" Grid.Column="1" Text="{Binding  RecipeCarbs, StringFormat='total carbs: {0}'}" FontSize="Medium"></Label>
+                <Label BackgroundColor="Cornsilk" Grid.Row="1"  Text="{Binding   RecipeProtein, StringFormat='total protein: {0}'}" FontSize="Medium"></Label>
+                <Label BackgroundColor="Cornsilk" Grid.Row="1" Grid.Column="1" Text="{Binding  RecipeFats, StringFormat='total fats: {0}'}" FontSize="Medium"></Label>
             </Grid>
             <Grid ColumnDefinitions="*,* " Grid.Row="6">
-                <Button Text="Save Recepie" 
+                <Button Text="Save Recipe" 
                     Clicked="OnSaveButtonClicked" />
                 <Button Grid.Column="1" 
-                    Text="Delete Recepie"
+                    Text="Delete Recipe"
                      Clicked="OnDeleteButtonClicked"/>
             </Grid>
 

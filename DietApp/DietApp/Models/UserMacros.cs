@@ -39,7 +39,7 @@ namespace DietApp.Models
                 case "lose weight":
                     var carbsLose = (int)Math.Ceiling(userData.CurrentWeight * 2.2);
                     var proteinLose = (int)Math.Ceiling(userData.CurrentWeight * 2.2);
-                    var totalCaloriesLose = userData.TDEE - 100;
+                    var totalCaloriesLose = userData.TDEE - 200;
                     var fatsLose = (totalCaloriesLose-(carbsLose * 4 + proteinLose * 4)) / 9;
                     return (carbsLose, fatsLose, proteinLose, totalCaloriesLose);
 

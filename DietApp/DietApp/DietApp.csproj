@@ -18,7 +18,7 @@
     <EmbeddedResource Update="Views\AddAMeal.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\AddEdditRecepie.xaml">
+    <EmbeddedResource Update="Views\AddEdditRecipe.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\MainPage.xaml">
@@ -27,14 +27,17 @@
     <EmbeddedResource Update="Views\PhenotypeAndGoal.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\RecepiesPage.xaml">
+    <EmbeddedResource Update="Views\RecipePage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Views\RecepiesPage.xaml.cs">
-      <DependentUpon>RecepiesPage.xaml</DependentUpon>
+    <Compile Update="Views\AddEdditRecipe.xaml.cs">
+      <DependentUpon>AddEdditRecipe.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\RecipePage.xaml.cs">
+      <DependentUpon>RecipePage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
 </Project>

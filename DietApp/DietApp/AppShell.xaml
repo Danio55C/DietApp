@@ -9,9 +9,9 @@
                       Icon="icon_feed.png"
                       ContentTemplate="{DataTemplate views:MainPage}" 
                       Route="HomePage"/>
-        <ShellContent Title="Recepies"
+        <ShellContent Title="Recipes"
                       Icon="icon_about.png"
-                      ContentTemplate="{DataTemplate views:RecepiesPage}"
-                       Route="RecepiePage"/>
+                      ContentTemplate="{DataTemplate views:RecipePage}"
+                       Route="RecipePage"/>
     </TabBar>
 </Shell>
