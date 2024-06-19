@@ -1,20 +1,14 @@
 ﻿using DietApp.Models;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using System.Text;
 using System.Windows.Input;
 using Xamarin.Forms;
-using static Humanizer.In;
 
 namespace DietApp.ViewModel
 {
     public class PhenotypeAndGoalViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
-
-
         public int ID { get; set; }
         public int CurrentWeight { get; set; }
         public int Height { get; set; }
@@ -22,23 +16,23 @@ namespace DietApp.ViewModel
         public string Gender { get; set; }
         public string LifeStyleTDEE { get; set; }
         public string UserGoal { get; set; }
-        
+
 
         public ICommand SavePhenotypeCommand { get; private set; }
-       
-        //binding
+        
+
         public PhenotypeAndGoalViewModel()
         {
             SavePhenotypeCommand = new Command(OnSave);
         }
-            
+       
         private async void OnSave(object obj)
         {
             try
             {
                 var userData = new UserData
                 {
-                    ID = ID,
+                    ID = ID = 1 ,
                     CurrentWeight = CurrentWeight,
                     Height = Height,
                     Age = Age,
@@ -48,23 +42,18 @@ namespace DietApp.ViewModel
                     UserGoal=UserGoal
                 };
                     
-
                 await App.Database.SaveUserDataAsync(userData);
                 await Application.Current.MainPage.DisplayAlert("Sukces", "Twoje dane zostały zapisane", "OK");
-                await Application.Current.MainPage.DisplayAlert("Test", userData.TDEE.ToString(), "cancel");
 
-                //var userMacros = new UserMacros();
-                //await userMacros.SaveMacrosAsync();
                 var userMacros = new UserMacros();
                 userMacros.InitializeAsync();
             }
             catch (Exception ex)
             {
-
                 await Application.Current.MainPage.DisplayAlert("bŁąd", ex.ToString(), "OK");
             }
-            
         }
+                
         public double ConvertActivityIndex(string LifeStyleTDEE)
         {
             switch (LifeStyleTDEE)
@@ -89,9 +78,18 @@ namespace DietApp.ViewModel
                     
             }
         }
+            
 
     }
 }
+
+
+
+
+                
+        
+            
+
 
 
         

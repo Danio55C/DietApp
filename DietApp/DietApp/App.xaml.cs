@@ -19,7 +19,7 @@ namespace DietApp
             {
                 if (_database == null)
                 {
-                    _database = new RecipieDatabase(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "DietAppDataBase.db3"));
+                    _database = new RecipieDatabase(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "DietAppBaseData.db3"));
                     
                 }
                 return _database;

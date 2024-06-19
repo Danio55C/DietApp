@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using SQLite;
 
@@ -19,16 +17,14 @@ namespace DietApp.Models
         public int DailyFatsLimit { get; set; }
         public int FatsConsumed { get; set; }
 
+       
         public  (int carbs, int fats, int protein, int calories)CalculateMacros(UserData userData)
         {
-            //var userData = await App.Database.GetUserDataAsync();
-
             if (userData == null)
                 return (0, 0, 0, 0);
             
             switch (userData.UserGoal)
             {
-                //to do poprawy
                 case "gain weight":
                     var carbsGain = (int)Math.Ceiling(userData.CurrentWeight * 2.2 * 2 );
                     var proteinGain = (int)Math.Ceiling(userData.CurrentWeight * 2.2 );
@@ -47,34 +43,37 @@ namespace DietApp.Models
                     var proteinMaintain = (int)Math.Ceiling(userData.CurrentWeight * 2.2);
                     var totalCaloriesMaintain = userData.TDEE;
                     var carbsMaintain = (totalCaloriesMaintain- (proteinMaintain*4)) / 2 / 4;
-                    var fatsMaintain = (totalCaloriesMaintain-(proteinMaintain*4)) /2 / 9;
+                    var fatsMaintain = (totalCaloriesMaintain-(proteinMaintain*4)) /2 / 9; 
                     return (carbsMaintain, fatsMaintain, proteinMaintain, totalCaloriesMaintain);
 
                 default:
                     return (0, 0, 0, 0);
             }
         }
-
+               
         public async void  InitializeAsync()
         {
-            // Wywołaj metodę CalculateMacros i przypisz wartości do właściwości
             var userData = await App.Database.GetUserDataAsync();
             var macros =  CalculateMacros(userData);
             DailyCaloricLimit = macros.calories;
             DailyCarbsLimit = macros.carbs;
             DailyProteinLimit = macros.protein;
             DailyFatsLimit = macros.fats;
-
-            // Zapisz dane do bazy danych
+            
             await SaveMacrosAsync();
         }
+            
         public async Task SaveMacrosAsync()
         {
             await App.Database.SaveUserMacrosAsync(this);
         }
+
     }
 }
+
+            
         
+
 
 
         

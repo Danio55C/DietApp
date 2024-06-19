@@ -27,9 +27,8 @@
                     <RowDefinition/>
                     <RowDefinition/>
                     <RowDefinition/>
-                   
                 </Grid.RowDefinitions>
-
+                   
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
@@ -51,7 +50,7 @@
                 <Label Grid.Row="3" Text="Płeć" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" FontSize="Large"/>
 
                 <Picker   Grid.Row="3" Grid.Column="1" HorizontalOptions="CenterAndExpand" VerticalOptions="Center"  x:Name="genderPicker" SelectedItem="{Binding PhenotypeAndGoalViewModel.Gender,  Mode=TwoWay}" Title="wybierz płeć" ></Picker>
-                <!--ItemsSource=""-->
+              
 
                 <Label Grid.ColumnSpan="2" Grid.Row="4" Text="Tryb życia" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" FontSize="Large"/>
 
@@ -59,24 +58,25 @@
 
                 <Label Grid.Row="6" Grid.ColumnSpan="2" Text="Your goal" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" FontSize="Title"/>
 
-                
-
-                <Picker   Grid.Row="7" HorizontalOptions="CenterAndExpand" VerticalOptions="Center"  Grid.ColumnSpan="2" x:Name="goalPicker" SelectedItem="{Binding PhenotypeAndGoalViewModel.UserGoal}" ></Picker>
+                <Picker   Grid.Row="7" HorizontalOptions="CenterAndExpand" VerticalOptions="Center"  Grid.ColumnSpan="2" x:Name="goalPicker" SelectedItem="{Binding PhenotypeAndGoalViewModel.UserGoal,  Mode=TwoWay}" ></Picker>
                 
                 <Button Grid.Row="9" Text="Save" Command="{Binding SavePhenotypeCommand}"></Button>
 
                 <Button Grid.Row="9" Grid.Column="1" Text="Edit"  ></Button> 
 
                 
-
-                
-                
-                
-
             </Grid>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
+
+
+                
+
+                
+                
+                
+
 
 
 

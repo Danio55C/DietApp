@@ -50,12 +50,6 @@ namespace DietApp.Views
         {
             await Shell.Current.GoToAsync($"AddAMeal?source=AddAMeal");
         }
-
-
-
-
-
-
         private async Task LoadUserMacros()
         {
             try
@@ -77,7 +71,6 @@ namespace DietApp.Views
                     fatsLabel.Text = $"Fats= {userMacros.FatsConsumed}/{userMacros.DailyFatsLimit} grams";
                     fatsProgresBar.Progress = Math.Round(Math.Min((double)userMacros.FatsConsumed / userMacros.DailyFatsLimit, 1), 2);
 
-
                 }
                 else
                 {
@@ -91,6 +84,13 @@ namespace DietApp.Views
         }
     }
 }
+
+
+
+
+
+
+
 
 
 

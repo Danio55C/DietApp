@@ -53,15 +53,15 @@
                 <Label Grid.Row="5" Text="fats (per 100 grams)" HorizontalOptions="CenterAndExpand" VerticalOptions="Center"/>
 
                 <Entry Grid.Row="5" Grid.Column="1" Keyboard="Numeric" Text="{Binding MealFats}"></Entry>
-
                 <Label Grid.Row="6" Text="price of a Product (pln)" HorizontalOptions="CenterAndExpand" VerticalOptions="Center"/>
-
                 <Entry Grid.Row="6" Grid.Column="1" Keyboard="Numeric" Text="{Binding MealPrice}"></Entry>
-
                 <Button Grid.Row="7" Text="Add" Clicked="OnAddMealButtonClicked"></Button>
                 <Button Grid.Row="7" Text="Cancel" Grid.Column="1"></Button>
-
                 <Label Grid.Row="8" Grid.ColumnSpan="2" Text="recent meals" FontSize="Medium" HorizontalOptions="CenterAndExpand" Margin="5"></Label>
+
+
+
+
 
                 <CollectionView HorizontalScrollBarVisibility="Always" x:Name="mealCollectionView" Grid.Row="9" Grid.ColumnSpan="2" SelectionMode="Single"
                     SelectionChanged="OnSelectionChanged">
@@ -76,9 +76,7 @@
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="8*" />
-                                        <!-- Druga kolumna zajmuje 30% dostępnej szerokości -->
                                         <ColumnDefinition Width="2*" />
-                                        <!-- Reszta kolumn, rozmieszczona normalnie -->
                                         <ColumnDefinition />
                                     </Grid.ColumnDefinitions>
                                     <Grid.RowDefinitions>
@@ -86,6 +84,7 @@
                                         <RowDefinition/>
                                         <RowDefinition/>
                                     </Grid.RowDefinitions>
+                                    
                                     <Label Text="{Binding MealName}"  FontSize="Medium"
                                         Grid.Row="0" HorizontalOptions="CenterAndExpand" VerticalOptions="Center"/>
                                     <Label Text="{Binding MealPrice,StringFormat='price: {0} pln'}" Grid.Row="0" Grid.Column="1"  FontSize="Caption" HorizontalOptions="CenterAndExpand"/>
@@ -93,6 +92,7 @@
                                     <Label Text="{Binding MealCarbs, StringFormat='carbs: {0}'}"  Grid.Column="1"  FontSize="Small" Grid.Row="1" />
                                     <Label Text="{Binding MealProtein, StringFormat='protein: {0}'}"  Grid.Row="2"  FontSize="Small"/>
                                     <Label Text="{Binding MealFats, StringFormat='fats: {0}'}"  FontSize="Small"  Grid.Column="1" Grid.Row="2" />
+                                    
                                 </Grid>
                             </SwipeView>
                         </DataTemplate>
@@ -103,6 +103,7 @@
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
+                                        
 
 
                 

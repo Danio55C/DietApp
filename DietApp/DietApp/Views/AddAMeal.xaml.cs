@@ -32,11 +32,6 @@ namespace DietApp.Views
             }
         }
 
-        public AddAMeal()
-        {
-            InitializeComponent();
-            BindingContext = new Meal();
-        }
 
         public AddAMeal(int RecipeId)
         {
@@ -44,6 +39,11 @@ namespace DietApp.Views
             _recipeId = RecipeId;
             BindingContext = new Meal();
 
+        }
+        public AddAMeal()
+        {
+            InitializeComponent();
+            BindingContext = new Meal();
         }
         protected override async void OnAppearing()
         {
@@ -55,7 +55,18 @@ namespace DietApp.Views
 
         }
 
+        private async Task CalculateConsumedCalories(Meal meal, int servingSize)
+        {
+            _userMacros.CaloriesConsumed += meal.MealCalories * servingSize / _defoultMealServingSize;
+            _userMacros.CarbsConsumed += meal.MealCarbs * servingSize / _defoultMealServingSize;
+            _userMacros.ProteinConsumed += meal.MealProtein * servingSize / _defoultMealServingSize;
+            _userMacros.FatsConsumed += meal.MealFats * servingSize / _defoultMealServingSize;
 
+            await _userMacros.SaveMacrosAsync();
+            await DisplayAlert("Updated Macros", $"Calories: {_userMacros.CaloriesConsumed}, Carbs: {_userMacros.CarbsConsumed}, Protein: {_userMacros.ProteinConsumed}, Fats: {_userMacros.FatsConsumed}", "OK", "Cancel");
+
+            await Shell.Current.GoToAsync("..");
+        }
 
 
         async void OnAddMealButtonClicked(object sender, EventArgs e)
@@ -93,6 +104,7 @@ namespace DietApp.Views
                         MealCalories = meal.MealCalories,
                         MealCarbs = meal.MealCarbs,
                         MealProtein = meal.MealProtein,
+      
                         MealFats = meal.MealFats,
                         MealPrice= meal.MealPrice,
                         RecipeId = _recipeId
@@ -110,9 +122,7 @@ namespace DietApp.Views
                     await App.Database.SaveRecipeIngredientAsync(mealIngredient);
 
                     await Shell.Current.GoToAsync("..");
-                    //await DisplayAlert("Sukses z AddAIgredient", Recipe.In, "cancel");
-
-                    // Navigate backwards
+                   
                 }
             }
             catch (Exception ex)
@@ -193,27 +203,11 @@ namespace DietApp.Views
         }
 
 
-        private async Task CalculateConsumedCalories(Meal meal, int servingSize)
-        {
-            _userMacros.CaloriesConsumed += meal.MealCalories * servingSize / _defoultMealServingSize;
-            _userMacros.CarbsConsumed += meal.MealCarbs * servingSize / _defoultMealServingSize;
-            _userMacros.ProteinConsumed += meal.MealProtein * servingSize / _defoultMealServingSize;
-            _userMacros.FatsConsumed += meal.MealFats * servingSize / _defoultMealServingSize;
-
-            await _userMacros.SaveMacrosAsync();
-            await DisplayAlert("Updated Macros", $"Calories: {_userMacros.CaloriesConsumed}, Carbs: {_userMacros.CarbsConsumed}, Protein: {_userMacros.ProteinConsumed}, Fats: {_userMacros.FatsConsumed}", "OK", "Cancel");
-
-            await Shell.Current.GoToAsync("..");
-        }
-
-        async void OnSwipeDeleteClicked(object sender, EventArgs e)
-        {
-            var meal = (Meal)BindingContext;
-            await App.Database.DeleteMealAsync(meal);
-        }
-
     }
 }
+
+        
+
 
 
 

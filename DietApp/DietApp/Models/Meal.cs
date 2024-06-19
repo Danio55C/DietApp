@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using SQLite;
 
 
@@ -11,12 +9,9 @@ namespace DietApp.Models
         [PrimaryKey, AutoIncrement]
         public int ID { get; set; }
 
-        [MaxLength(50)]
-        [NotNull]
+        [MaxLength(50)]   [NotNull]
         public string MealName { get; set; }
-
         [MaxLength(50)]
-
         public string MealType { get; set; }
         [NotNull]
         public int MealCalories { get; set; }
@@ -30,6 +25,10 @@ namespace DietApp.Models
         public DateTime Date { get; set; }
     }
 }
+
+      
+
+
 
 
 

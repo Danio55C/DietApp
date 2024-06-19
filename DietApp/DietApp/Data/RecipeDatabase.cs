@@ -118,15 +118,13 @@ namespace DietApp.Data
                 var existingUserMacros = await GetUserMacrosAsync();
                 if (existingUserMacros != null)
                 {
-                    userMacros.ID = existingUserMacros.ID; // Zakładając, że Id jest kluczem głównym
+                    userMacros.ID = existingUserMacros.ID; 
                     await _database.UpdateAsync(userMacros);
                 }
                 else
                 {
                     await _database.InsertAsync(userMacros);
                 }
-
-                //Debug.WriteLine("User macros saved successfully.");
             }
             catch (Exception ex)
             {
@@ -134,16 +132,19 @@ namespace DietApp.Data
             }
         }
 
-        public Task<int> SaveUserDataAsync(UserData userData)
+               
+
+        public  async Task SaveUserDataAsync(UserData userData)
         {
-            if (userData.ID == 0)
+            var existingUserData = await GetUserDataAsync();
+            if (existingUserData != null)
             {
-                return _database.InsertAsync(userData);
+                userData.ID = existingUserData.ID; // Zakładając, że Id jest kluczem głównym
+                await _database.UpdateAsync(userData);
             }
             else
             {
-                return _database.UpdateAsync(userData);
-
+                await _database.InsertAsync(userData);
             }
         }
 

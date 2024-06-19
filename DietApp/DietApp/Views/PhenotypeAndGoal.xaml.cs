@@ -75,8 +75,12 @@ namespace DietApp.Views
                     goalPicker.SelectedItem = userData.UserGoal;
                     //testLabel.Text = userData.ActivityIndex.ToString();
                 }
-                    
-                 
+
+                else
+                {
+                    await DisplayAlert("Błąd", "null", "cancel");
+                }
+            
             }
             catch (Exception ex)
             {

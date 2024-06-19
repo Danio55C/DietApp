@@ -16,7 +16,6 @@ namespace DietApp.Models
         public int ID { get; set; }
         [NotNull]
         public string RecipeName { get; set; }
-
         public string PreparatingMethod { get; set; }
         public int RecipeCalories { get; set; }
         public int RecipeCarbs { get; set; }
@@ -36,4 +35,5 @@ namespace DietApp.Models
         public List<RecipeIngredients> Ingredients { get; set; }
     }
 }
+
 

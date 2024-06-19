@@ -14,26 +14,18 @@ namespace DietApp.Views
     {
         int _defoultMealServingSize = 100;
         UserMacros _userMacros;
-
-
-
         public string ItemId
         {
-
             set
             {
                 LoadNote(value);
             }
         }
-
         public AddEdditRecipe()
         {
             InitializeComponent();
-
-            // Set the BindingContext of the page to a new Note.
             BindingContext = new Recipe();
         }
-
         async void LoadNote(string itemId)
         {
             try
@@ -43,28 +35,15 @@ namespace DietApp.Views
                 Recipe Recipe = await App.Database.GetNoteAsync(id);
                 BindingContext = Recipe;
 
-
-
                 var ingredients = await App.Database.GetIngredientsForRecipeAsync(Recipe.ID);
                 ingredientListCollectionView.ItemsSource = ingredients;
                 CalculateRecipeMacros(Recipe, ingredients);
-
-
-                //string test="";
-                //for (int i = 0; i < Recipe.Ingredients.Count; i++)
-                //{
-
-                //    test = test + Recipe.Ingredients[i].MealName + ", ";
-                //}
-
-                //await DisplayAlert("Sukses z AddAIgredient", "składniki: " + test, "cancel");
             }
             catch (Exception)
             {
                 Console.WriteLine("Failed to load note.");
             }
         }
-
         async void OnSaveButtonClicked(object sender, EventArgs e)
         {
             var Recipe = (Recipe)BindingContext;
@@ -75,7 +54,6 @@ namespace DietApp.Views
             // Navigate backwards
             await Shell.Current.GoToAsync("..");
         }
-
         async void OnAddaIngredientButtonClicked(object sender, EventArgs e)
         {
             try
@@ -89,12 +67,6 @@ namespace DietApp.Views
 
                 await DisplayAlert("bład", ex.ToString(), "cancel");
             }
-        }
-        async private void OnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
-        {
-            var Recipe = (Recipe)BindingContext;
-            var ingredients = await App.Database.GetIngredientsForRecipeAsync(Recipe.ID);
-            CalculateRecipeMacros(Recipe, ingredients);
         }
         async void CalculateRecipeMacros(Recipe Recipe, List<RecipeIngredients> ingredients)
         {
@@ -120,13 +92,9 @@ namespace DietApp.Views
             var result = await DisplayAlert("Did you ate this dish?", $"Total macros that will be added: Calories:{Recipe.RecipeCalories}, Carbs: {Recipe.RecipeCarbs}, Protein: {Recipe.RecipeProtein}, Fats: {Recipe.RecipeFats}", "OK", "Cancel");
 
             if (result == true)
-            {
                 await CalculateConsumedCalories(Recipe);
-            }
-
+            
             await Shell.Current.GoToAsync("//HomePage");
-
-
         }
 
         private async Task CalculateConsumedCalories(Recipe Recipe)
@@ -140,15 +108,40 @@ namespace DietApp.Views
             await _userMacros.SaveMacrosAsync();
             await DisplayAlert("Updated Macros", $"Calories: {_userMacros.CaloriesConsumed}, Carbs: {_userMacros.CarbsConsumed}, Protein: {_userMacros.ProteinConsumed}, Fats: {_userMacros.FatsConsumed}", "OK", "Cancel");
         }
+
         async void OnDeleteButtonClicked(object sender, EventArgs e)
         {
             var Recipe = (Recipe)BindingContext;
 
             await App.Database.DeleteNoteAsync(Recipe);
-
-            // Navigate backwards
             await Shell.Current.GoToAsync("..");
         }
+            
+
+
+
+
+
+
+            
+
+
+
+
+
+
+        
+
+
+
+
+
+
+            
+
+
+
+
 
         async void OnGenerateShoppingListButtonClicked(object sender, EventArgs e)
         {
@@ -210,21 +203,8 @@ namespace DietApp.Views
 
 
 
-//var modalPage = new ContentPage
-//{
-//    Title = "Lista zakupów",
-//    Content = new StackLayout
-//    {
-//        Padding = new Thickness(20),
-//        Children =
-//                {
 
-//                new Label { Text = "Your shopping list:", FontSize = 20, FontAttributes = FontAttributes.Bold },
-//                 // Wyświetl listę zakupów
-             
-//                new Label { Text =jointString},
-//                new Label { Text = $"Total Dish cost= {recipe.RecipePrice}" }, // Wyświetl listę zakupów
-//                new Button { Text = "Zamknij", Command = new Command(async () => await Navigation.PopModalAsync()) } // Przycisk zamknięcia modala
-//            }
-//    }
-//};
+
+
+
+
