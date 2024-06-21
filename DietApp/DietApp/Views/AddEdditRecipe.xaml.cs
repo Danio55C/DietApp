@@ -86,17 +86,6 @@ namespace DietApp.Views
             await App.Database.SaveNoteAsync(Recipe);
         }
 
-        async void OnConsumeThisRecipeClicked(object sender, EventArgs e)
-        {
-            var Recipe = (Recipe)BindingContext;
-            var result = await DisplayAlert("Did you ate this dish?", $"Total macros that will be added: Calories:{Recipe.RecipeCalories}, Carbs: {Recipe.RecipeCarbs}, Protein: {Recipe.RecipeProtein}, Fats: {Recipe.RecipeFats}", "OK", "Cancel");
-
-            if (result == true)
-                await CalculateConsumedCalories(Recipe);
-            
-            await Shell.Current.GoToAsync("//HomePage");
-        }
-
         private async Task CalculateConsumedCalories(Recipe Recipe)
         {
             _userMacros = await App.Database.GetUserMacrosAsync();
@@ -108,6 +97,17 @@ namespace DietApp.Views
             await _userMacros.SaveMacrosAsync();
             await DisplayAlert("Updated Macros", $"Calories: {_userMacros.CaloriesConsumed}, Carbs: {_userMacros.CarbsConsumed}, Protein: {_userMacros.ProteinConsumed}, Fats: {_userMacros.FatsConsumed}", "OK", "Cancel");
         }
+        async void OnConsumeThisRecipeClicked(object sender, EventArgs e)
+        {
+            var Recipe = (Recipe)BindingContext;
+            var result = await DisplayAlert("Did you ate this dish?", $"Total macros that will be added: Calories:{Recipe.RecipeCalories}, Carbs: {Recipe.RecipeCarbs}, Protein: {Recipe.RecipeProtein}, Fats: {Recipe.RecipeFats}", "OK", "Cancel");
+
+            if (result == true)
+                await CalculateConsumedCalories(Recipe);
+            
+            await Shell.Current.GoToAsync("//HomePage");
+        }
+
 
         async void OnDeleteButtonClicked(object sender, EventArgs e)
         {
@@ -118,39 +118,12 @@ namespace DietApp.Views
         }
             
 
-
-
-
-
-
-            
-
-
-
-
-
-
-        
-
-
-
-
-
-
-            
-
-
-
-
-
         async void OnGenerateShoppingListButtonClicked(object sender, EventArgs e)
         {
             var recipe = (Recipe)BindingContext;
             var ingredients = await App.Database.GetIngredientsForRecipeAsync(recipe.ID);
             recipe.RecipePrice = 0;
             
-
-
             var stackLayout = new StackLayout
             {
                 Padding = new Thickness(20)
@@ -165,7 +138,7 @@ namespace DietApp.Views
 
             foreach (var item in ingredients)
             {
-                recipe.RecipePrice = +item.MealPrice;
+                recipe.RecipePrice += item.MealPrice;
                 
                 stackLayout.Children.Add(new Label { Text = $"{item.MealName}", FontSize = 20, });
                 stackLayout.Children.Add(new Label { Text = $"quantity: {item.QuantityInGrams} grams", FontSize = 10, });
@@ -195,8 +168,35 @@ namespace DietApp.Views
             await Navigation.PushModalAsync(modalPage);
         }
 
+
+
     }
 }
+
+
+
+
+
+            
+
+
+
+
+
+
+        
+
+
+
+
+
+
+            
+
+
+
+
+
 
 
 

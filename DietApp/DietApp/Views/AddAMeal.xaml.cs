@@ -177,15 +177,10 @@ namespace DietApp.Views
                         {
                             mealIngredient.QuantityInGrams = servingSize;
 
-
-
                             Recipe.Ingredients.Add(mealIngredient);
                             await App.Database.SaveRecipeIngredientAsync(mealIngredient);
                             await App.Database.SaveNoteAsync(Recipe);
                         }
-                        //await DisplayAlert("Sukses z AddAIgredient", Recipe.In, "cancel");
-
-                        // Navigate backwards
                         await Shell.Current.GoToAsync("..");
                     }
                 }
@@ -196,7 +191,6 @@ namespace DietApp.Views
                 }
             }
         }
-
         async void OnGoToRecipesClicked(object sender, EventArgs e)
         {
             await Shell.Current.GoToAsync("//RecipePage");
@@ -205,6 +199,10 @@ namespace DietApp.Views
 
     }
 }
+
+
+                        
+
 
         
 
