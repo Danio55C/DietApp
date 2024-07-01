@@ -29,7 +29,7 @@ namespace DietApp.Views
             goalPicker.ItemsSource = GoalList;
 
             BindingContext = new PhenotypeAndGoalViewModel();
-            //BindingContext = new UserData();
+           
 
             LoadUserData();
 

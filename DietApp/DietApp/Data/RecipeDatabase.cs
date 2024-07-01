@@ -23,8 +23,6 @@ namespace DietApp.Data
 
         }
 
-
-
         public Task<List<Recipe>> GetNotesAsync()
         {
             //Get all notes.
@@ -131,9 +129,6 @@ namespace DietApp.Data
                 Debug.WriteLine($"Error saving user macros: {ex.Message}");
             }
         }
-
-               
-
         public  async Task SaveUserDataAsync(UserData userData)
         {
             var existingUserData = await GetUserDataAsync();
@@ -147,8 +142,6 @@ namespace DietApp.Data
                 await _database.InsertAsync(userData);
             }
         }
-
-
         public Task<List<RecipeIngredients>> GetMealIngredientsAsync(int recipeId)
         {
             return _database.Table<RecipeIngredients>().Where(i => i.ID == recipeId).ToListAsync();
@@ -156,3 +149,10 @@ namespace DietApp.Data
 
     }
 }
+
+
+
+
+               
+
+

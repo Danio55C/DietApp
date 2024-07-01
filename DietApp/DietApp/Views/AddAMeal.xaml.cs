@@ -104,14 +104,12 @@ namespace DietApp.Views
                         MealCalories = meal.MealCalories,
                         MealCarbs = meal.MealCarbs,
                         MealProtein = meal.MealProtein,
-      
                         MealFats = meal.MealFats,
                         MealPrice= meal.MealPrice,
                         RecipeId = _recipeId
                     };
-
+      
                     var Recipe = await App.Database.GetNoteAsync(_recipeId);
-
 
                     string result = await DisplayPromptAsync("Quantiy", $"Enter the serving size for {mealIngredient.MealName}:", "OK", "Cancel", null, 4);
                     if (int.TryParse(result, out int servingSize))
@@ -199,6 +197,8 @@ namespace DietApp.Views
 
     }
 }
+
+
 
 
                         
